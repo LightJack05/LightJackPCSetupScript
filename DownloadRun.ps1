@@ -9,4 +9,4 @@ Start-Process $env:TEMP\SetupScript\RunMeAsAdmin.bat
 
 Start-Sleep 3
 
-Remove-Item -r %temp%\SetupScript
+Remove-Item -r $env:TEMP\SetupScript
