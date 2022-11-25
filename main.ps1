@@ -19,7 +19,7 @@ param (
 
 function Main {
     #Function called on execution
-    Write-Output "Welcome! Please press any key to begin setup..."
+    Write-Host "Welcome! Please press any key to begin setup..."
     $Host.UI.RawUI.ReadKey()
     Clear-Host
     if ($Careless) {
@@ -53,8 +53,8 @@ function CheckForWinget {
 
 function KickStartUpdate {
     # Open MS Store on app installer page to update it.
-    Write-Output 'Opening Windows Store to kickstart app-updates.'
-    Write-Output 'Please click "Update" on the window that pops up.'
+    Write-Host 'Opening Windows Store to kickstart app-updates.'
+    Write-Host 'Please click "Update" on the window that pops up.'
     Start-Process ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1
     Start-Sleep 8
     #Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
@@ -67,8 +67,8 @@ function WaitForWinget {
         Start-Sleep 1
         if (CheckForWinget) {
             Clear-Host
-            Write-Output 'Winget Found!'
-            Write-Output 'Killing Windows Store...'
+            Write-Host 'Winget Found!'
+            Write-Host 'Killing Windows Store...'
             taskkill.exe /f /IM WinStore.App.exe
             SetupMachine
             break
@@ -77,8 +77,8 @@ function WaitForWinget {
 }
 
 function SetupMachine {
-    Write-Output 'Initiating Setup...'
-    Write-Output 'Installing Software'
+    Write-Host 'Initiating Setup...'
+    Write-Host 'Installing Software'
     #
     # IMPORTANT
     #
@@ -110,12 +110,14 @@ function SetupMachine {
         winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
 
-        Write-Output 'Changing Settings...'
+        Write-Host 'Changing Settings...'
 
-        Write-Output 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
+        Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
         Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
 
-        Write-Output 'Setup has been completed. Press any key to exit.'
+        Write-Host 'Cleaning up...'
+        Remove-Item -r $env:TEMP\SetupScript
+        Write-Host 'Setup has been completed. Press any key to exit.'
     }
 
 

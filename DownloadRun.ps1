@@ -8,5 +8,3 @@ curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/R
 Start-Process $env:TEMP\SetupScript\RunMeAsAdmin.bat
 
 Start-Sleep 3
-
-Remove-Item -r $env:TEMP\SetupScript
