@@ -88,6 +88,7 @@ function SetupMachine {
 
     if ($Careless) {
         # Currently unused.
+        Write-Host "You idiot are running in careless mode. Please disable that." -ForegroundColor Red
     }
     else {
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
@@ -108,11 +109,16 @@ function SetupMachine {
         winget install Microsoft.DotNet.DesktopRuntime.6 --source winget --accept-source-agreements --accept-package-agreements
         winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
+
+        Write-Output 'Changing Settings...'
+
+        Write-Output 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
+        Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
+
+        Write-Output 'Setup has been completed. Press any key to exit.'
     }
 
-    Write-Output 'Changing Settings...'
 
-    Write-Output 'Setup has been completed. Press any key to exit.'
 }
 
 Main
