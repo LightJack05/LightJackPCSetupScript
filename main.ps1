@@ -126,7 +126,7 @@ function SetupMachine {
         Write-Host 'Changing Settings...'
 
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
-        Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
+        Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
 
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
