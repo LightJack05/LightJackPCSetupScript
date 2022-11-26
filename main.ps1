@@ -95,6 +95,14 @@ function SetupMachine {
         Write-Host 'Setup has been completed. Press any key to exit.'
     }
     else {
+
+        # PowerToys config copying
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys\
+
+
+
+
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
         # To add/remove software simply add a line or remove it.
         # Replace the package identifier (e.g. 7zip.7zip) with software you need to add it.
@@ -120,6 +128,8 @@ function SetupMachine {
         # Visual studio
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
+
+
 
         Write-Host "Updating currently installed software"
         winget upgrade --all
