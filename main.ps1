@@ -52,7 +52,7 @@ function CheckForWinget {
 function KickStartUpdate {
     # Open MS Store on app installer page to update it.
     Write-Host 'Opening Windows Store to kickstart app-updates.'
-    Write-Host 'Please click "Update" on the window that pops up.'
+    Write-Host 'The update to the Product should start automatically. Please hang on a minute. Otherwise, please download updates manually.'
     Start-Process ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1
     Start-Sleep 8
     #Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
@@ -119,7 +119,7 @@ function SetupMachine {
 
         # Visual studio
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
-        winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig"
+        winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
 
         Write-Host "Updating currently installed software"
         winget upgrade --all
