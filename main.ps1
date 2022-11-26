@@ -115,6 +115,7 @@ function SetupMachine {
         winget install Microsoft.DotNet.DesktopRuntime.6 --source winget --accept-source-agreements --accept-package-agreements
         winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
+        winget install Unity.UnityHub --source winget --accept-source-agreements --accept-package-agreements
 
         # Visual studio
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
@@ -124,6 +125,9 @@ function SetupMachine {
         winget upgrade --all
 
         Write-Host 'Changing Settings...'
+        if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
+            c:\Windows\Resources\Themes\dark.theme
+        }
 
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
         Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
