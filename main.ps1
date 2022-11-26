@@ -116,6 +116,13 @@ function SetupMachine {
         winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
 
+        # Visual studio
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig"
+
+        Write-Host "Updating currently installed software"
+        winget upgrade --all
+
         Write-Host 'Changing Settings...'
 
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
