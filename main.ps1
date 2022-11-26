@@ -7,8 +7,7 @@
 #
 # It requires the winget package manager to be installed at runtime or before starting.
 # You may also run it in careless mode by adding "-Careless" to the invocation command.
-# This is the default right now since the chrome installer hash is currently broken in winget.
-#
+# See further down for instructions on how careless works.
 #
 # I'm a beginner in terms of PowerShell Scripting, please don't be too hard on me. ;)
 #
@@ -37,7 +36,6 @@ function Main {
             WaitForWinget
         }
     }
-
 }
 
 function CheckForWinget {
@@ -82,16 +80,24 @@ function SetupMachine {
     #
     # IMPORTANT
     #
-    # In regular operation you should disable "AvoidHashChecks".
+    # In regular operation you should disable "Careless"-mode.
     # This is intended as a temporary solution if hashes are creating problems.
     # Usually these problems are resolved within a couple hours or at most days.
 
     if ($Careless) {
         # Currently unused.
+        # Here you can use curl to download software that has problems with hash-checks.
+        # Note that the regular winget commands will be skipped with this installation method.
+        # You need to add them in here to have them run too.
         Write-Host "You idiot are running in careless mode. Please disable that." -ForegroundColor Red
+        Write-Host 'Cleaning up...'
+        Remove-Item -r $env:TEMP\SetupScript
+        Write-Host 'Setup has been completed. Press any key to exit.'
     }
     else {
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
+        # To add/remove software simply add a line or remove it.
+        # Replace the package identifier (e.g. 7zip.7zip) with software you need to add it.
         winget install 7zip.7zip --source winget --accept-source-agreements --accept-package-agreements
         winget install GIMP.GIMP --source winget --accept-source-agreements --accept-package-agreements
         winget install GitHub.GitHubDesktop --source winget --accept-source-agreements --accept-package-agreements
