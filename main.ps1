@@ -75,6 +75,7 @@ function WaitForWinget {
 }
 
 function SetupMachine {
+    mkdir $env:TEMP\SetupScript
     Write-Host 'Initiating Setup...'
     Write-Host 'Installing Software'
     #
@@ -96,9 +97,10 @@ function SetupMachine {
     }
     else {
 
+
         # PowerToys config copying
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
-        Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys\
+        Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\
 
 
 
