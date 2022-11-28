@@ -7,9 +7,10 @@
 #
 # It requires the winget package manager to be installed at runtime or before starting.
 # You may also run it in careless mode by adding "-Careless" to the invocation command.
+# Do note that Careless-Mode also skips the normal installation steps and replaces them with more advanced solutions, should you choose to implement any.
 # See further down for instructions on how careless works.
 #
-# I'm a beginner in terms of PowerShell Scripting, please don't be too hard on me. ;)
+# I'm a beginner in terms of PowerShell scripting, please don't be too hard on me. ;)
 #
 # Setup Script by LightJack05
 param (
@@ -17,20 +18,25 @@ param (
 )
 
 function Main {
-    #Function called on execution
+    # Function called on execution
     Write-Host "Welcome! Please press any key to begin setup..."
+    # Wait for button press before continuing
     $Host.UI.RawUI.ReadKey()
     Clear-Host
     if ($Careless) {
+        # Warn the user if they are running in careless mode
+        # NOTE: Careless mode skips the winget installation!
         Write-Host 'WARNING: Running in careless mode. There is no check if the downloaded file is damaged or malicious. There is also no version checking. Please make sure software is up to date once installed.' -ForegroundColor red
         SetupMachine
     }
     else {
         # Check if winget needs to be installed
         if (CheckForWinget) {
+            # If winget it found already, start setup
             SetupMachine
         }
         else {
+            # If winget is not found, install it.
             Write-Host 'Updating store software to aquire winget...'
             KickStartUpdate
             WaitForWinget
@@ -40,6 +46,7 @@ function Main {
 
 function CheckForWinget {
 
+    # Check if the winget command is available. Return true if it is.
     $cmdName = "winget"
     if (Get-Command $cmdName -errorAction SilentlyContinue) {
         Return $true
@@ -52,7 +59,7 @@ function CheckForWinget {
 function KickStartUpdate {
     # Open MS Store on app installer page to update it.
     Write-Host 'Opening Windows Store to kickstart app-updates.'
-    Write-Host 'The update to the Product should start automatically. Please hang on a minute. Otherwise, please download updates manually.'
+    Write-Host 'The update to the product should start automatically. Please hang on a minute. Otherwise, please download updates manually.'
     Start-Process ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1
     Start-Sleep 8
     #Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
@@ -64,10 +71,13 @@ function WaitForWinget {
     while ($true) {
         Start-Sleep 1
         if (CheckForWinget) {
+            # Run once winget is found
             Clear-Host
             Write-Host 'Winget Found!'
             Write-Host 'Killing Windows Store...'
+            # Kill MS Store UI since it is no longer needed
             taskkill.exe /f /IM WinStore.App.exe
+            # Call setup function
             SetupMachine
             break
         }
@@ -75,6 +85,7 @@ function WaitForWinget {
 }
 
 function SetupMachine {
+    # Create temp directory should it not exist yet
     mkdir $env:TEMP\SetupScript
     Write-Host 'Initiating Setup...'
     Write-Host 'Installing Software'
@@ -97,14 +108,13 @@ function SetupMachine {
     }
     else {
 
-
         # PowerToys config copying
+        # Download zip archive
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        # Extract archive to appdata folder
         Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\
 
-
-
-
+        # Install the specified software (specified directly in the script)
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
         # To add/remove software simply add a line or remove it.
         # Replace the package identifier (e.g. 7zip.7zip) with software you need to add it.
@@ -128,17 +138,21 @@ function SetupMachine {
         winget install Unity.UnityHub --source winget --accept-source-agreements --accept-package-agreements
 
         # Visual studio
+        # Download the vsconfig file for installation
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        # install Visual Studio with downloaded config
         winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
 
+        # Kickstart store updates
+        Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
 
-
+        # Update installed desktop applications
         Write-Host "Updating currently installed software"
         winget upgrade --all
 
+
         Write-Host 'Changing Settings...'
-
-
+        # Apply dark theme (theme for Windows 11, App dark mode for Windows 10)
         if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
             c:\Windows\Resources\Themes\dark.theme
         }
@@ -146,17 +160,18 @@ function SetupMachine {
             Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' -Name 'AppsUseLightTheme' -Value 0
         }
 
+        # Copy shortcuts for portable applications
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
         Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
 
+        # Delete remaining files that are no longer needed, including the temp directory
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
     }
-
-
 }
 
+# Call entry function "Main"
 Main
 
 
