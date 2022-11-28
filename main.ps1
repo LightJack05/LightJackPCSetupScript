@@ -109,7 +109,7 @@ function SetupMachine {
     else {
 
         # PowerToys config copying
-        # Download zip archive
+        # Download powertoys zip archive
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         # Extract archive to appdata folder
         Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\
