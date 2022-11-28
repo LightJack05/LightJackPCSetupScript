@@ -137,8 +137,13 @@ function SetupMachine {
         winget upgrade --all
 
         Write-Host 'Changing Settings...'
+
+
         if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
             c:\Windows\Resources\Themes\dark.theme
+        }
+        else {
+            Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' -Name 'AppsUseLightTheme' -Value 0
         }
 
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
