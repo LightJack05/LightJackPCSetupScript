@@ -134,7 +134,7 @@ function SetupMachine {
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
         winget install Unity.UnityHub --source winget --accept-source-agreements --accept-package-agreements
         winget install powershell --source msstore --accept-source-agreements --accept-package-agreements
-
+        winget install balena.etcher --source winget --accept-source-agreements --accept-package-agreements
 
         # PowerToys config copying
         # Kill PowerToys to make the files available
