@@ -160,6 +160,12 @@ function SetupMachine {
             Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize' -Name 'AppsUseLightTheme' -Value 0
         }
 
+        # Remove bloatware
+        Get-AppxPackage *skypeapp* | Remove-AppxPackage
+        Get-AppxPackage *solitairecollection* | Remove-AppxPackage
+
+
+
         # Copy shortcuts for portable applications
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
         Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
