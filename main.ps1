@@ -86,7 +86,9 @@ function WaitForWinget {
 
 function SetupMachine {
     # Create temp directory should it not exist yet
-    mkdir $env:TEMP\SetupScript
+    if (!(Test-Path -Path $env:TEMP\SetupScript)) {
+        mkdir $env:TEMP\SetupScript
+    }
     Write-Host 'Initiating Setup...'
     Write-Host 'Installing Software'
     #
