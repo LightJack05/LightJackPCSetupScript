@@ -108,11 +108,7 @@ function SetupMachine {
     }
     else {
 
-        # PowerToys config copying
-        # Download powertoys zip archive
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
-        # Extract archive to appdata folder
-        Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\
+
 
         # Install the specified software (specified directly in the script)
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
@@ -122,7 +118,6 @@ function SetupMachine {
         winget install GIMP.GIMP --source winget --accept-source-agreements --accept-package-agreements
         winget install GitHub.GitHubDesktop --source winget --accept-source-agreements --accept-package-agreements
         winget install Git.Git --source winget --accept-source-agreements --accept-package-agreements
-        winget install Microsoft.Edge --source winget --accept-source-agreements --accept-package-agreements
         winget install Microsoft.WindowsTerminal --source winget --accept-source-agreements --accept-package-agreements
         winget install Microsoft.OneDrive --source winget --accept-source-agreements --accept-package-agreements
         winget install Parsec.Parsec --source winget --accept-source-agreements --accept-package-agreements
@@ -136,6 +131,17 @@ function SetupMachine {
         winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
         winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
         winget install Unity.UnityHub --source winget --accept-source-agreements --accept-package-agreements
+        winget install powershell --source msstore --accept-source-agreements --accept-package-agreements
+
+
+        # PowerToys config copying
+        # Kill PowerToys to make the files available
+        taskkill /IM powertoys.exe /f
+        # Download powertoys zip archive
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        # Extract archive to appdata folder
+        Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\ -Force
+
 
         # Visual studio
         # Download the vsconfig file for installation
