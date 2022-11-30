@@ -110,8 +110,6 @@ function SetupMachine {
     }
     else {
 
-
-
         # Install the specified software (specified directly in the script)
         # I know a JSON would probably be better, but I want everything to be consolidated into one file.
         # To add/remove software simply add a line or remove it.
@@ -139,6 +137,7 @@ function SetupMachine {
         # PowerToys config copying
         # Kill PowerToys to make the files available
         taskkill /IM powertoys.exe /f
+        Start-Sleep 2
         # Download powertoys zip archive
         curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         # Extract archive to appdata folder
@@ -155,8 +154,8 @@ function SetupMachine {
         Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
 
         # Update installed desktop applications
-        Write-Host "Updating currently installed software"
-        winget upgrade --all
+        #Write-Host "Updating currently installed software"
+        #winget upgrade --all
 
 
         Write-Host 'Changing Settings...'
