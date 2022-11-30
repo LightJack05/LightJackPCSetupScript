@@ -19,9 +19,10 @@ param (
 
 function Main {
     # Function called on execution
-    Write-Host "Welcome! Please press any key to begin setup..."
-    # Wait for button press before continuing
-    $Host.UI.RawUI.ReadKey()
+    Write-Host "Welcome! Setup will start in 5 seconds."
+    Write-Host "To cancel, press Ctrl+C or close this window."
+    Start-Sleep 5
+
     Clear-Host
     if ($Careless) {
         # Warn the user if they are running in careless mode
@@ -62,7 +63,6 @@ function KickStartUpdate {
     Write-Host 'The update to the product should start automatically. Please hang on a minute. Otherwise, please download updates manually.'
     Start-Process ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1
     Start-Sleep 8
-    #Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
 }
 
 function WaitForWinget {
@@ -182,6 +182,8 @@ function SetupMachine {
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
+        Pause
+
     }
 }
 
