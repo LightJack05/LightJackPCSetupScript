@@ -14,14 +14,52 @@
 #
 # Setup Script by LightJack05
 param (
+    [switch]$All,
+    [switch]$Software = $false,
+    [switch]$PowerToysSettings = $false,
+    [switch]$VisualStudio = $false,
+    [switch]$UpdateStoreApps = $false,
+    [switch]$DarkMode = $false,
+    [switch]$RemoveBloat = $false,
+    [switch]$ShortcutCopying = $false,
     [switch]$Careless = $false
 )
 
 function Main {
+
+    if ($All) {
+        $Software = $true
+        $PowerToysSettings = $true
+        $VisualStudio = $true
+        $UpdateStoreApps = $true
+        $DarkMode = $true
+        $RemoveBloat = $true
+        $ShortcutCopying = $true
+    }
+
+
+
     # Function called on execution
     Write-Host "Welcome! Setup will start in 5 seconds."
     Write-Host "To cancel, press Ctrl+C or close this window."
     Start-Sleep 5
+
+    Write-Host "Downloading required files..."
+
+    # Create temp directory should it not exist yet
+    if (!(Test-Path -Path $env:TEMP\SetupScript)) {
+        mkdir $env:TEMP\SetupScript
+    }
+
+    if ($PowerToysSettings) {
+        # Download powertoys zip archive
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+    }
+
+    if ($VisualStudio) {
+        # Download the vsconfig file for installation
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+    }
 
     Clear-Host
     if ($Careless) {
@@ -86,19 +124,8 @@ function WaitForWinget {
 }
 
 function StartSetup {
-    if ($Careless) {
-        powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Careless
-    }
-    else {
-        powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1
-    }
+    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Software $Software -PowerToysSettings $PowerToysSettings -VisualStudio $VisualStudio -UpdateStoreApps $UpdateStoreApps -DarkMode $DarkMode -RemoveBloat $RemoveBloat -ShortcutCopying $ShortcutCopying -Careless $Careless
 }
 
 # Call entry function "Main"
 Main
-
-
-
-
-
-
