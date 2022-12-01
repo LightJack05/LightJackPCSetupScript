@@ -43,6 +43,7 @@ function Main {
             WaitForWinget
         }
     }
+    Pause
 }
 
 function CheckForWinget {

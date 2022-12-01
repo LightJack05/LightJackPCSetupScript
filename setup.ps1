@@ -21,12 +21,12 @@ function SetupMachine {
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
-        Pause
+
     }
     else {
 
         # Install the specified software (specified directly in the script)
-        # I know a JSON would probably be better, but I want everything to be consolidated into one file.
+
         # To add/remove software simply add a line or remove it.
         # Replace the package identifier (e.g. 7zip.7zip) with software you need to add it.
         winget install 7zip.7zip --source winget --accept-source-agreements --accept-package-agreements
@@ -54,14 +54,14 @@ function SetupMachine {
         taskkill /IM powertoys.exe /f
         Start-Sleep 2
         # Download powertoys zip archive
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/separate-setup-script/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         # Extract archive to appdata folder
         Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\ -Force
 
 
         # Visual studio
         # Download the vsconfig file for installation
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/separate-setup-script/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         # install Visual Studio with downloaded config
         winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
 
@@ -95,7 +95,7 @@ function SetupMachine {
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
-        Pause
+
 
     }
 }
