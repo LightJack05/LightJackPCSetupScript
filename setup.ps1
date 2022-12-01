@@ -1,14 +1,14 @@
 param (
-    [switch]$All = $false,
-    [switch]$Software = $false,
-    [switch]$PowerToysSettings = $false,
-    [switch]$VisualStudio = $false,
-    [switch]$UpdateStoreApps = $false,
-    [switch]$DarkMode = $false,
-    [switch]$RemoveBloat = $false,
-    [switch]$ShortcutCopying = $false,
-    [switch]$OfflineMode = $false,
-    [switch]$Careless = $false
+    [switch]$SAll = $false,
+    [switch]$SSoftware = $false,
+    [switch]$SPowerToysSettings = $false,
+    [switch]$SVisualStudio = $false,
+    [switch]$SUpdateStoreApps = $false,
+    [switch]$SDarkMode = $false,
+    [switch]$SRemoveBloat = $false,
+    [switch]$SShortcutCopying = $false,
+    [switch]$SOfflineMode = $false,
+    [switch]$SCareless = $false
 )
 
 
