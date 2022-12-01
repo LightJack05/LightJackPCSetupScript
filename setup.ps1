@@ -58,14 +58,14 @@ function SetupMachine {
         taskkill /IM powertoys.exe /f
         Start-Sleep 2
         # Download powertoys zip archive
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/separate-setup-script/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         # Extract archive to appdata folder
         Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\ -Force
 
 
         # Visual studio
         # Download the vsconfig file for installation
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/separate-setup-script/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         # install Visual Studio with downloaded config
         winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
 
