@@ -22,16 +22,11 @@ param (
     [switch]$DarkMode = $false,
     [switch]$RemoveBloat = $false,
     [switch]$ShortcutCopying = $false,
-    [switch]$Careless = $false,
-    [switch]$OfflineMode = $false
+    [switch]$OfflineMode = $false,
+    [switch]$Careless = $false
 )
 
 function Main {
-
-
-
-
-
     # Function called on execution
     Write-Host "Welcome! Setup will start in 5 seconds."
     Write-Host "To cancel, press Ctrl+C or close this window."
@@ -118,7 +113,7 @@ function WaitForWinget {
 }
 
 function StartSetup {
-    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Software $Software -PowerToysSettings $PowerToysSettings -VisualStudio $VisualStudio -UpdateStoreApps $UpdateStoreApps -DarkMode $DarkMode -RemoveBloat $RemoveBloat -ShortcutCopying $ShortcutCopying -OfflineMode $OfflineMode -Careless $Careless
+    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Software=$Software -PowerToysSettings=$PowerToysSettings -VisualStudio=$VisualStudio -UpdateStoreApps=$UpdateStoreApps -DarkMode=$DarkMode -RemoveBloat=$RemoveBloat -ShortcutCopying=$ShortcutCopying -OfflineMode=$OfflineMode -Careless=$Careless
 }
 
 # Call entry function "Main"
