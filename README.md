@@ -5,7 +5,7 @@ It's a simple Powershell script that you can modify for your own usecase.
 ## Usecase
 The script is intended to make setup of a new machine or a new Windows install easier. It can install programs, change settings, change themes, start updates, etc. Basically everything you can do from powershell!
 
-## Modifying the script
+## Using the script for yourself
 The script is intended to be used together with a Github repo. It will download itself and the required files from there.
 1. Create a new Github repo or fork mine.
 2. Get the raw links for the required files. (Click on the file > Raw > Copy the link)
@@ -15,9 +15,21 @@ The script is intended to be used together with a Github repo. It will download 
 3. Replace the default links with yours in the following files:
     * DownloadRun.bat (3 lines, watch the commented out one-liner)
     * main.ps1 (2 lines)
-4. Add your own software
-    * Software that will be installed is specified in main.ps1 in a big block of winget commands. Change the product identifiers to the software you need.
-5. By default the script will also download updates and enable dark mode, among other things. You may disable anything you don't need by deleting it or adding a comment infront of it with '#'.
+
+## Changing the things the script does.
+By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own Repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
+* Software (-Software) installs software specified in the script.
+* Power Toys Settings (-PowerToysSettings) downloads a PowerToys.zip that contains powertoys settings and copies it into appdata.
+* Visual Studio (-VisualStudio) downloads a .vsconfig from the repo and installs Visual Studio with that config.
+* Update Store Apps (-UpdateStoreApps) kickstarts store updates upon execution.
+* Dark Mode (-DarkMode) enables windows dark mode (Apps for Windows 10 and Dark Theme for Windows 11)
+* Remove Bloatware (-RemoveBloat) removes Solitare and Skype
+* Shortcut Copying (-ShortcutCopying) copies shortcuts from Onedrive into your start menu folder (very specific to my usecase.)
+
+## Additional Options
+* Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
+* Careless Mode (-Careless) will run the script in a more careless manner. This is currently unused and will simply exit. This will also skip winget installation.
+* All (-All) will use all components in the script.
 
 ## Using the script
 The script contains a one-liner in the file "DownloadRun.bat" (note that the link has to be changed to your repo) that is written as a comment. Copy that (without the '#') and put it in a powershell (admin) and hit enter. It will download the script and execute it.
