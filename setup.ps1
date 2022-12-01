@@ -23,7 +23,7 @@ function SetupMachine {
     # This is intended as a temporary solution if hashes are creating problems.
     # Usually these problems are resolved within a couple hours or at most days.
 
-    if ($Careless) {
+    if ($SCareless) {
         # Currently unused.
         # Here you can use curl to download software that has problems with hash-checks.
         # Note that the regular winget commands will be skipped with this installation method.
@@ -35,8 +35,8 @@ function SetupMachine {
 
     }
     else {
-        if (!$OfflineMode) {
-            if ($Software -or $All) {
+        if (!$SOfflineMode) {
+            if ($SSoftware -or $SAll) {
                 # Install the specified software (specified directly in the script)
 
                 # To add/remove software simply add a line or remove it.
@@ -62,19 +62,19 @@ function SetupMachine {
                 winget install balena.etcher --source winget --accept-source-agreements --accept-package-agreements
             }
 
-            if ($UpdateStoreApps -or $All) {
+            if ($SUpdateStoreApps -or $SAll) {
                 # Kickstart store updates
                 Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
             }
 
-            if ($VisualStudio -or $All) {
+            if ($SVisualStudio -or $SAll) {
                 # Visual studio
                 # install Visual Studio with downloaded config
                 winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
             }
         }
 
-        if ($PowerToysSettings -or $All) {
+        if ($SPowerToysSettings -or $SAll) {
 
 
             # PowerToys config copying
@@ -94,7 +94,7 @@ function SetupMachine {
 
 
         Write-Host 'Changing Settings...'
-        if ($DarkMode -or $All) {
+        if ($SDarkMode -or $SAll) {
             # Apply dark theme (theme for Windows 11, App dark mode for Windows 10)
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
                 c:\Windows\Resources\Themes\dark.theme
@@ -104,7 +104,7 @@ function SetupMachine {
             }
         }
 
-        if ($RemoveBloat -or $All) {
+        if ($SRemoveBloat -or $SAll) {
 
             # Remove bloatware
             Write-Host "Removing bloatware..."
@@ -112,7 +112,7 @@ function SetupMachine {
             Get-AppxPackage *solitairecollection* | Remove-AppxPackage
         }
 
-        if ($ShortcutCopying -or $All) {
+        if ($SShortcutCopying -or $SAll) {
             # Copy shortcuts for portable applications
             Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
