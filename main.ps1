@@ -70,7 +70,7 @@ function Main {
             WaitForWinget
         }
     }
-    Pause
+
 }
 
 function CheckForWinget {
@@ -119,3 +119,5 @@ function StartSetup {
 
 # Call entry function "Main"
 Main
+
+Pause
