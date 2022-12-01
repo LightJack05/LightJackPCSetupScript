@@ -22,20 +22,13 @@ param (
     [switch]$DarkMode = $false,
     [switch]$RemoveBloat = $false,
     [switch]$ShortcutCopying = $false,
-    [switch]$Careless = $false
+    [switch]$Careless = $false,
+    [switch]$OfflineMode = $false
 )
 
 function Main {
 
-    if ($All) {
-        $Software = $true
-        $PowerToysSettings = $true
-        $VisualStudio = $true
-        $UpdateStoreApps = $true
-        $DarkMode = $true
-        $RemoveBloat = $true
-        $ShortcutCopying = $true
-    }
+
 
 
 
@@ -50,15 +43,16 @@ function Main {
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
         mkdir $env:TEMP\SetupScript
     }
+    if (!$OfflineMode) {
+        if ($PowerToysSettings -or $All) {
+            # Download powertoys zip archive
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/module-arguments/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+        }
 
-    if ($PowerToysSettings) {
-        # Download powertoys zip archive
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
-    }
-
-    if ($VisualStudio) {
-        # Download the vsconfig file for installation
-        curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        if ($VisualStudio -or $All) {
+            # Download the vsconfig file for installation
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/module-arguments/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        }
     }
 
     Clear-Host
@@ -124,7 +118,7 @@ function WaitForWinget {
 }
 
 function StartSetup {
-    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Software $Software -PowerToysSettings $PowerToysSettings -VisualStudio $VisualStudio -UpdateStoreApps $UpdateStoreApps -DarkMode $DarkMode -RemoveBloat $RemoveBloat -ShortcutCopying $ShortcutCopying -Careless $Careless
+    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Software $Software -PowerToysSettings $PowerToysSettings -VisualStudio $VisualStudio -UpdateStoreApps $UpdateStoreApps -DarkMode $DarkMode -RemoveBloat $RemoveBloat -ShortcutCopying $ShortcutCopying -OfflineMode $OfflineMode -Careless $Careless
 }
 
 # Call entry function "Main"
