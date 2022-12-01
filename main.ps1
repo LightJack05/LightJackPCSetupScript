@@ -113,7 +113,8 @@ function WaitForWinget {
 }
 
 function StartSetup {
-    powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -SAll:$All -SSoftware:$Software -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SOfflineMode:$OfflineMode -SCareless:$Careless
+    Set-Location $env:TEMP\SetupScript
+    .\setup.ps1 -SAll:$All -SSoftware:$Software -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"
