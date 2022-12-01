@@ -39,7 +39,7 @@ function Main {
         mkdir $env:TEMP\SetupScript
     }
     if (!$OfflineMode) {
-        if ($Software) {
+        if ($Software -or $All) {
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
