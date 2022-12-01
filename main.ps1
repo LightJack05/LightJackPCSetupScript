@@ -39,6 +39,9 @@ function Main {
         mkdir $env:TEMP\SetupScript
     }
     if (!$OfflineMode) {
+        if ($Software) {
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/winget.json -o $env:TEMP\SetupScript\winget.json
+        }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip

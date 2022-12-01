@@ -37,29 +37,9 @@ function SetupMachine {
     else {
         if (!$SOfflineMode) {
             if ($SSoftware -or $SAll) {
-                # Install the specified software (specified directly in the script)
-
-                # To add/remove software simply add a line or remove it.
-                # Replace the package identifier (e.g. 7zip.7zip) with software you need to add it.
-                winget install 7zip.7zip --source winget --accept-source-agreements --accept-package-agreements
-                winget install GIMP.GIMP --source winget --accept-source-agreements --accept-package-agreements
-                winget install GitHub.GitHubDesktop --source winget --accept-source-agreements --accept-package-agreements
-                winget install Git.Git --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.WindowsTerminal --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.OneDrive --source winget --accept-source-agreements --accept-package-agreements
-                winget install Parsec.Parsec --source winget --accept-source-agreements --accept-package-agreements
-                winget install Valve.Steam --source winget --accept-source-agreements --accept-package-agreements
-                winget install Python.Python.3.11 --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.WindowsSDK --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.PowerToys --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.OpenJDK.17 --source winget --accept-source-agreements --accept-package-agreements
-                winget install VMware.WorkstationPlayer --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.DotNet.DesktopRuntime.6 --source winget --accept-source-agreements --accept-package-agreements
-                winget install Microsoft.VisualStudioCode --source winget --accept-source-agreements --accept-package-agreements
-                winget install Discord.Discord --source winget --accept-source-agreements --accept-package-agreements
-                winget install Unity.UnityHub --source winget --accept-source-agreements --accept-package-agreements
-                winget install powershell --source msstore --accept-source-agreements --accept-package-agreements
-                winget install balena.etcher --source winget --accept-source-agreements --accept-package-agreements
+                # Install the specified software
+                # Change the winget.json to change the software that will be installed.
+                winget import $env:TEMP\SetupScript\winget.json
             }
 
             if ($SUpdateStoreApps -or $SAll) {
