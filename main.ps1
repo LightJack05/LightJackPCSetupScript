@@ -14,7 +14,7 @@
 #
 # Setup Script by LightJack05
 param (
-    [switch]$All,
+    [switch]$All = $false,
     [switch]$Software = $false,
     [switch]$PowerToysSettings = $false,
     [switch]$VisualStudio = $false,
