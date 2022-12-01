@@ -60,6 +60,9 @@
                 },
                 {
                     "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.7"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.OpenJDK.17"
                 }
             ],
             "SourceDetails": {
