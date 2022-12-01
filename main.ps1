@@ -85,11 +85,6 @@ function WaitForWinget {
     }
 }
 
-
-# Call entry function "Main"
-Main
-
-
 function StartSetup {
     if ($Careless) {
         powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Careless
@@ -98,6 +93,12 @@ function StartSetup {
         powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1
     }
 }
+
+# Call entry function "Main"
+Main
+
+
+
 
 
 
