@@ -103,10 +103,11 @@ function SetupMachine {
         # Here you can use curl to download software that has problems with hash-checks.
         # Note that the regular winget commands will be skipped with this installation method.
         # You need to add them in here to have them run too.
-        Write-Host "You idiot are running in careless mode. Please disable that." -ForegroundColor Red
+        Write-Host "You are running in -Careless mode. There currently are no actions configured." -ForegroundColor Red
         Write-Host 'Cleaning up...'
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
+        Pause
     }
     else {
 
@@ -168,10 +169,9 @@ function SetupMachine {
         }
 
         # Remove bloatware
+        Write-Host "Removing bloatware..."
         Get-AppxPackage *skypeapp* | Remove-AppxPackage
         Get-AppxPackage *solitairecollection* | Remove-AppxPackage
-
-
 
         # Copy shortcuts for portable applications
         Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
