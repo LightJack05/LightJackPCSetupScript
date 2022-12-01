@@ -28,13 +28,13 @@ function Main {
         # Warn the user if they are running in careless mode
         # NOTE: Careless mode skips the winget installation!
         Write-Host 'WARNING: Running in careless mode. There is no check if the downloaded file is damaged or malicious. There is also no version checking. Please make sure software is up to date once installed.' -ForegroundColor red
-        SetupMachine
+        StartSetup
     }
     else {
         # Check if winget needs to be installed
         if (CheckForWinget) {
             # If winget it found already, start setup
-            SetupMachine
+            StartSetup
         }
         else {
             # If winget is not found, install it.
@@ -79,7 +79,7 @@ function WaitForWinget {
             # Kill MS Store UI since it is no longer needed
             taskkill.exe /f /IM WinStore.App.exe
             # Call setup function
-            SetupMachine
+            StartSetup
             break
         }
     }
@@ -90,7 +90,14 @@ function WaitForWinget {
 Main
 
 
-
+function StartSetup {
+    if ($Careless) {
+        powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1 -Careless
+    }
+    else {
+        powershell -ExecutionPolicy Bypass $env:TEMP\SetupScript\setup.ps1
+    }
+}
 
 
 

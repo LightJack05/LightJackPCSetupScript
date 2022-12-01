@@ -1,3 +1,7 @@
+param (
+    [switch]$Careless = $false
+)
+
 function SetupMachine {
     # Create temp directory should it not exist yet
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
@@ -99,3 +103,5 @@ function SetupMachine {
 
     }
 }
+
+SetupMachine
