@@ -41,6 +41,9 @@
                     "PackageIdentifier": "Microsoft.VisualStudioCode"
                 },
                 {
+                    "PackageIdentifier": "Python.Python.3.11"
+                },
+                {
                     "PackageIdentifier": "Microsoft.DotNet.Runtime.3_1"
                 },
                 {
