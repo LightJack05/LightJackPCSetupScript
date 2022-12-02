@@ -39,6 +39,10 @@ function Main {
         mkdir $env:TEMP\SetupScript
     }
     if (!$OfflineMode) {
+        if ($Software -or $All) {
+            # Download winget json file
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
+        }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
@@ -60,7 +64,7 @@ function Main {
     else {
         # Check if winget needs to be installed
         if (CheckForWinget) {
-            # If winget it found already, start setup
+            # If winget is found already, start setup
             StartSetup
         }
         else {

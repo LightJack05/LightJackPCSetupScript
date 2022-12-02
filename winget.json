@@ -1,0 +1,90 @@
+{
+    "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+    "CreationDate": "2022-12-01T21:19:35.665-00:00",
+    "Sources": [
+        {
+            "Packages": [
+                {
+                    "PackageIdentifier": "7zip.7zip"
+                },
+                {
+                    "PackageIdentifier": "GIMP.GIMP"
+                },
+                {
+                    "PackageIdentifier": "Discord.Discord"
+                },
+                {
+                    "PackageIdentifier": "GitHub.GitHubDesktop"
+                },
+                {
+                    "PackageIdentifier": "Git.Git"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.WindowsTerminal"
+                },
+                {
+                    "PackageIdentifier": "Parsec.Parsec"
+                },
+                {
+                    "PackageIdentifier": "Valve.Steam"
+                },
+                {
+                    "PackageIdentifier": "Unity.UnityHub"
+                },
+                {
+                    "PackageIdentifier": "Balena.Etcher"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.WindowsSDK"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.VisualStudioCode"
+                },
+                {
+                    "PackageIdentifier": "Python.Python.3.11"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.DotNet.Runtime.3_1"
+                },
+                {
+                    "PackageIdentifier": "VMware.WorkstationPlayer"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.WindowsSDK"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.PowerToys"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.7"
+                },
+                {
+                    "PackageIdentifier": "Microsoft.OpenJDK.17"
+                }
+            ],
+            "SourceDetails": {
+                "Argument": "https://cdn.winget.microsoft.com/cache",
+                "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+                "Name": "winget",
+                "Type": "Microsoft.PreIndexed.Package"
+            }
+        },
+        {
+            "Packages": [
+                {
+                    "PackageIdentifier": "9MZ1SNWT0N5D"
+                }
+            ],
+            "SourceDetails": {
+                "Argument": "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+                "Identifier": "StoreEdgeFD",
+                "Name": "msstore",
+                "Type": "Microsoft.Rest"
+            }
+        }
+    ],
+    "WinGetVersion": "1.3.2691"
+}
