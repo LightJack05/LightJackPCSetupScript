@@ -100,6 +100,7 @@ function SetupMachine {
 
         # Delete remaining files that are no longer needed, including the temp directory
         Write-Host 'Cleaning up...'
+        Set-Location $env:USERPROFILE
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host 'Setup has been completed. Press any key to exit.'
 
