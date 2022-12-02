@@ -11,10 +11,11 @@ The script is intended to be used together with a Github repo. It will download 
 2. Get the raw links for the required files. (Click on the file > Raw > Copy the link)
     * RunMeAsAdmin.bat
     * main.ps1
+    * setup.ps1
     * Other files you might need (e.g. PowerToys.zip, .vsconfig, etc.)
 3. Replace the default links with yours in the following files:
-    * DownloadRun.bat (3 lines, watch the commented out one-liner)
-    * main.ps1 (2 lines)
+    * DownloadRun.bat (4 lines, watch the commented out one-liner)
+    * main.ps1 (3 lines)
 
 ## Changing the things the script does.
 By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own Repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
