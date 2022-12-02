@@ -41,16 +41,16 @@ function Main {
     if (!$OfflineMode) {
         if ($Software -or $All) {
             # Download winget json file
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/winget.json -o $env:TEMP\SetupScript\winget.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
         if ($VisualStudio -or $All) {
             # Download the vsconfig file for installation
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/winget-script-to-json/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
     }
 
