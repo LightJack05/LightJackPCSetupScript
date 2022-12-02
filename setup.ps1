@@ -39,7 +39,7 @@ function SetupMachine {
             if ($SSoftware -or $SAll) {
                 # Install the specified software
                 # Change the winget.json to change the software that will be installed.
-                winget import $env:TEMP\SetupScript\winget.json
+                winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
             }
 
             if ($SUpdateStoreApps -or $SAll) {
