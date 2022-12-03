@@ -16,6 +16,7 @@
 param (
     [switch]$All = $false,
     [switch]$Software = $false,
+    [switch]$Discord = $false,
     [switch]$PowerToysSettings = $false,
     [switch]$VisualStudio = $false,
     [switch]$UpdateStoreApps = $false,
@@ -118,7 +119,7 @@ function WaitForWinget {
 
 function StartSetup {
     Set-Location $env:TEMP\SetupScript
-    .\setup.ps1 -SAll:$All -SSoftware:$Software -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SOfflineMode:$OfflineMode -SCareless:$Careless
+    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"

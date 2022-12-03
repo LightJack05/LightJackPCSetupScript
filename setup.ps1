@@ -1,6 +1,7 @@
 param (
     [switch]$SAll = $false,
     [switch]$SSoftware = $false,
+    [switch]$SDiscord = $false,
     [switch]$SPowerToysSettings = $false,
     [switch]$SVisualStudio = $false,
     [switch]$SUpdateStoreApps = $false,
@@ -38,10 +39,13 @@ function SetupMachine {
         if (!$SOfflineMode) {
             if ($SSoftware -or $SAll) {
                 # Install the specified software
-                # Installing discord separately since it requires special arguments
-                winget install Discord.Discord --source winget --override "-s"
                 # Change/replace the winget.json to change the software that will be installed.
                 winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
+            }
+
+            if ($SDiscord -or $SAll) {
+                # Installing discord separately since it requires special arguments
+                winget install Discord.Discord --source winget --override "-s"
             }
 
             if ($SUpdateStoreApps -or $SAll) {

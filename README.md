@@ -20,6 +20,7 @@ The script is intended to be used together with a Github repo. It will download 
 ## Changing the things the script does.
 By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own Repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
 * Software (-Software) installs software specified in the winget.json.
+* Discord (-Discord) installs Discord.
 * Power Toys Settings (-PowerToysSettings) downloads a PowerToys.zip that contains powertoys settings and copies it into appdata.
 * Visual Studio (-VisualStudio) downloads a .vsconfig from the repo and installs Visual Studio with that config.
 * Update Store Apps (-UpdateStoreApps) kickstarts store updates upon execution.
