@@ -46,7 +46,7 @@ function SetupMachine {
 
             if ($SDiscord -or $SAll) {
                 # Installing discord separately since it requires special arguments
-                winget install Discord.Discord --source winget --override "-s"
+                winget install Discord.Discord --source winget --override "-s" --accept-source-agreements --accept-package-agreements
             }
 
             if ($SUpdateStoreApps -or $SAll) {
