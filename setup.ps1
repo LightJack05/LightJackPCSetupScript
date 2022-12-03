@@ -38,6 +38,8 @@ function SetupMachine {
         if (!$SOfflineMode) {
             if ($SSoftware -or $SAll) {
                 # Install the specified software
+                # Installing discord separately since it requires special arguments
+                winget install Discord.Discord --source winget --override "-s"
                 # Change/replace the winget.json to change the software that will be installed.
                 winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
             }
