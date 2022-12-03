@@ -16,8 +16,8 @@ param (
 
 function SetupMachine {
 
-    Write-Host 'Initiating Setup...'
-    Write-Host 'Installing Software'
+
+
     #
     # IMPORTANT
     #
@@ -30,67 +30,28 @@ function SetupMachine {
         # Here you can use curl to download software that has problems with hash-checks.
         # Note that the regular winget commands will be skipped with this installation method.
         # You need to add them in here to have them run too.
-        Write-Host "You are running in -Careless mode. There currently are no actions configured." -ForegroundColor Red
-        Write-Host 'Cleaning up...'
+        Write-Host "[SetupScript - ERROR] You are running in -Careless mode. There currently are no actions configured." -ForegroundColor Red
+        Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
         Remove-Item -r $env:TEMP\SetupScript
-        Write-Host 'Setup has been completed. Press any key to exit.'
+        Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
 
     }
     else {
-        if (!$SOfflineMode) {
-            if ($SSoftware -or $SAll) {
-                # Install the specified software
-                # Change/replace the winget.json to change the software that will be installed.
-                winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
-            }
 
-            if ($SDiscord -or $SAll) {
-                # Installing discord separately since it requires special arguments
-                winget install Discord.Discord --source winget --override "-s" --accept-source-agreements --accept-package-agreements
-            }
-
-            if ($SUpdateStoreApps -or $SAll) {
-                # Kickstart store updates
-                Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
-            }
-
-            if ($SVisualStudio -or $SAll) {
-                # Visual studio
-                # install Visual Studio with downloaded config
-                winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
-            }
-        }
+        Write-Host '[SetupScript - INFO] Changing Settings...' -ForegroundColor Green
 
         if ($RestoreOldRightClickMenu -or $SAll) {
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
+                Write-Host '[SetupScript - INFO] Restoring the old right-click menu...' -ForegroundColor Green
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
             }
             else {
-                Write-Host "Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
+                Write-Host "WARNING: Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
             }
         }
 
-        if ($SPowerToysSettings -or $SAll) {
-
-
-            # PowerToys config copying
-            # Kill PowerToys to make the files available
-            taskkill /IM powertoys.exe /f
-            Start-Sleep 2
-            # Extract archive to appdata folder
-            Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys -Force
-        }
-
-
-
-
-        # Update installed desktop applications
-        #Write-Host "Updating currently installed software"
-        #winget upgrade --all
-
-
-        Write-Host 'Changing Settings...'
         if ($SDarkMode -or $SAll) {
+            Write-Host 'Applying dark mode...'
             # Apply dark theme (theme for Windows 11, App dark mode for Windows 10)
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
                 c:\Windows\Resources\Themes\dark.theme
@@ -100,27 +61,88 @@ function SetupMachine {
             }
         }
 
+        if (!$SOfflineMode) {
+            Write-Host '[SetupScript - INFO] Installing specified Software...' -ForegroundColor Green
+            if ($SSoftware -or $SAll) {
+
+                # Install the specified software
+                # Change/replace the winget.json to change the software that will be installed.
+                if (Test-Path -Path $env:TEMP\SetupScript\winget.json) {
+                    Write-Host '[SetupScript - INFO] Importing the Winget JSON file...' -ForegroundColor Green
+                    winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
+                }
+                else {
+                    Write-Host '[SetupScript - ERROR] Could not find JSON file for import. Skipping this step...' -ForegroundColor Green
+                }
+            }
+
+            if ($SDiscord -or $SAll) {
+                Write-Host '[SetupScript - INFO] Installing Discord...' -ForegroundColor Green
+                # Installing discord separately since it requires special arguments
+                winget install Discord.Discord --source winget --override "-s" --accept-source-agreements --accept-package-agreements
+            }
+
+            if ($SUpdateStoreApps -or $SAll) {
+                Write-Host '[SetupScript - INFO] Kickstarting Windows Store Updates...' -ForegroundColor Green
+                # Kickstart store updates
+                Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+            }
+
+            if ($SVisualStudio -or $SAll) {
+
+                # Visual studio
+                # install Visual Studio with downloaded config
+                if (Test-Path -Path $env:TEMP\SetupScript\.vsconfig) {
+                    Write-Host '[SetupScript - INFO] Installing Visual Studio with .vsconfig file...' -ForegroundColor Green
+                    winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
+                }
+                else {
+                    Write-Host '[SetupScript - ERROR] Could not find VSConfig file. Skipping this step...' -ForegroundColor Green
+                }
+
+            }
+        }
+
+        if ($SPowerToysSettings -or $SAll) {
+            if (Test-Path -Path $env:TEMP\SetupScript\powertoys.zip) {
+                Write-Host '[SetupScript - INFO] Extracting PowerToys settings...' -ForegroundColor Green
+                # PowerToys config copying
+                # Kill PowerToys to make the files available
+                taskkill /IM powertoys.exe /f
+                Start-Sleep 2
+                # Extract archive to appdata folder
+                Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys -Force
+            }
+            else {
+                Write-Host '[SetupScript - ERROR] Could not find PowerToys zip file. Skipping this step...' -ForegroundColor Green
+            }
+        }
+
+        # Update installed desktop applications
+        #Write-Host "Updating currently installed software"
+        #winget upgrade --all
+
+
         if ($SRemoveBloat -or $SAll) {
 
             # Remove bloatware
-            Write-Host "Removing bloatware..."
+            Write-Host "[SetupScript - INFO] Removing bloatware..." -ForegroundColor Green
             Get-AppxPackage *skypeapp* | Remove-AppxPackage
             Get-AppxPackage *solitairecollection* | Remove-AppxPackage
         }
 
         if ($SShortcutCopying -or $SAll) {
             # Copy shortcuts for portable applications
-            Write-Host 'Copying shortcuts. (Make sure onedrive has downloaded them!)'
+            Write-Host '[SetupScript - INFO] Copying shortcuts. (Make sure onedrive has downloaded them!)' -ForegroundColor Green
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
-        Write-Host 'Cleaning up...'
+        Write-Host '[SetupScript - INFO] Cleaning up...'
         Set-Location $env:USERPROFILE
         Remove-Item -r $env:TEMP\SetupScript
-        Write-Host 'Setup has been completed. Press any key to exit.'
-
-
+        Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
+        Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
     }
 }
 

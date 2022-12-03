@@ -30,37 +30,55 @@ param (
 
 function Main {
     # Function called on execution
-    Write-Host "Welcome! Setup will start in 5 seconds."
-    Write-Host "To cancel, press Ctrl+C or close this window."
+    Write-Host "[SetupScript - INFO] Welcome! Setup will start in 5 seconds." -ForegroundColor Green
+    Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C or close this window." -ForegroundColor Green
     Start-Sleep 5
 
-    Write-Host "Downloading required files..."
+
 
     # Create temp directory should it not exist yet
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
+        Write-Host '[SetupScript - INFO] Creating temporary directory and cloning required files...' -ForegroundColor Green
         mkdir $env:TEMP\SetupScript
+        if ((Test-Path -Path $env:TEMP\SetupScript)) {
+            Write-Host '[SetupScript - INFO] Sucessfully created directory.' -ForegroundColor Green
+        }
+        else {
+            Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
+            Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+            Pause
+            Exit
+        }
     }
+    else {
+        Write-Host '[SetupScript - INFO] Using existing temp directory...' -ForegroundColor Green
+    }
+    Start-Sleep 3
+    Clear-Host
     if (!$OfflineMode) {
         if ($Software -or $All) {
             # Download winget json file
+            Write-Host '[SetupScript - INFO] Downloading Winget JSON file...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
+            Write-Host '[SetupScript - INFO] Donwloading PowerToys Settings archive...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
         if ($VisualStudio -or $All) {
             # Download the vsconfig file for installation
+            Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
     }
 
-    Clear-Host
+
     if ($Careless) {
         # Warn the user if they are running in careless mode
         # NOTE: Careless mode skips the winget installation!
-        Write-Host 'WARNING: Running in careless mode. There is no check if the downloaded file is damaged or malicious. There is also no version checking. Please make sure software is up to date once installed.' -ForegroundColor red
+        Write-Host '[SetupScript - WARNING] Running in careless mode. There is no check if the downloaded file is damaged or malicious. There is also no version checking. Please make sure software is up to date once installed.' -ForegroundColor red
         StartSetup
     }
     else {
@@ -71,7 +89,7 @@ function Main {
         }
         else {
             # If winget is not found, install it.
-            Write-Host 'Updating store software to aquire winget...'
+            Write-Host '[SetupScript - INFO] Updating store software to aquire winget...' -ForegroundColor Green
             KickStartUpdate
             WaitForWinget
         }
@@ -93,22 +111,22 @@ function CheckForWinget {
 
 function KickStartUpdate {
     # Open MS Store on app installer page to update it.
-    Write-Host 'Opening Windows Store to kickstart app-updates.'
-    Write-Host 'The update to the product should start automatically. Please hang on a minute. Otherwise, please download updates manually.'
+    Write-Host '[SetupScript - INFO] Opening Windows Store to kickstart app-updates.' -ForegroundColor Green
+    Write-Host '[SetupScript - INFO] The update to the product should start automatically. Please hang on a minute. Otherwise, please download updates manually.' -ForegroundColor Green
     Start-Process ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1
     Start-Sleep 8
 }
 
 function WaitForWinget {
     # Loop until winget is found.
-    Write-Host 'The script will continue when winget is found. Please wait.'
+    Write-Host '[SetupScript - INFO] The script will continue when winget is found. Please wait.' -ForegroundColor Green
     while ($true) {
         Start-Sleep 1
         if (CheckForWinget) {
             # Run once winget is found
             Clear-Host
-            Write-Host 'Winget Found!'
-            Write-Host 'Killing Windows Store...'
+            Write-Host '[SetupScript - INFO] Winget Found!' -ForegroundColor Green
+            Write-Host '[SetupScript - INFO] Killing Windows Store...' -ForegroundColor Green
             # Kill MS Store UI since it is no longer needed
             taskkill.exe /f /IM WinStore.App.exe
             # Call setup function
@@ -119,6 +137,7 @@ function WaitForWinget {
 }
 
 function StartSetup {
+    Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
     .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
