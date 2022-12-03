@@ -8,15 +8,15 @@ if (!(Test-Path -Path $env:TEMP\SetupScript)) {
     mkdir $env:TEMP\SetupScript
 }
 else {
-    Write-Host '[SetupScript - WARNING] %appdata%\SetupScript already exists. Burning it to the ground...' -ForegroundColor DarkYellow
+    Write-Host '[SetupScript - WARNING] %appdata%\SetupScript already exists. Burning it to the ground...' -ForegroundColor Yellow
     Remove-Item -r $env:TEMP\SetupScript
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
         Write-Host '[SetupScript - INFO] Creating temporary directory...' -ForegroundColor Green
         mkdir $env:TEMP\SetupScript
     }
     else {
-        Write-Host '[SetupScript - ERROR] Failed to delete existing directory.' -ForegroundColor Red
-        Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+        Write-Host '[SetupScript - ERROR] Failed to delete existing directory.' -ForegroundColor DarkRed
+        Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
         Pause
         Exit
     }
@@ -26,8 +26,8 @@ if ((Test-Path -Path $env:TEMP\SetupScript)) {
     Write-Host '[SetupScript - INFO] Successfully created directory.' -ForegroundColor Green
 }
 else {
-    Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
-    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+    Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
+    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
     Pause
     Exit
 }
@@ -40,8 +40,8 @@ if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:
     Write-Host '[SetupScript - INFO] Successfully cloned files.' -ForegroundColor Green
 }
 else {
-    Write-Host '[SetupScript - ERROR] Failed to download one or more required files.' -ForegroundColor Red
-    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+    Write-Host '[SetupScript - ERROR] Failed to download one or more required files.' -ForegroundColor DarkRed
+    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
     Pause
     Exit
 }

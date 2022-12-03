@@ -47,8 +47,8 @@ function Main {
             Write-Host '[SetupScript - INFO] Sucessfully created directory.' -ForegroundColor Green
         }
         else {
-            Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
-            Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+            Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
+            Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
             $host.ui.RawUI.WindowTitle = "Setup Script: ERROR"
             Pause
             Exit

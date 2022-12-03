@@ -32,7 +32,7 @@ function SetupMachine {
         # Here you can use curl to download software that has problems with hash-checks.
         # Note that the regular winget commands will be skipped with this installation method.
         # You need to add them in here to have them run too.
-        Write-Host "[SetupScript - ERROR] You are running in -Careless mode. There currently are no actions configured." -ForegroundColor Red
+        Write-Host "[SetupScript - ERROR] You are running in -Careless mode. There currently are no actions configured." -ForegroundColor DarkRed
         Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
@@ -48,7 +48,7 @@ function SetupMachine {
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
             }
             else {
-                Write-Host "[SetupScript - WARNING] Restoring the old menu is not available on Windows 10." -ForegroundColor DarkYellow
+                Write-Host "[SetupScript - WARNING] Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
             }
         }
 
