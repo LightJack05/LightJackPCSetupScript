@@ -8,6 +8,7 @@ param (
     [switch]$SDarkMode = $false,
     [switch]$SRemoveBloat = $false,
     [switch]$SShortcutCopying = $false,
+    [switch]$SRestoreOldRightClickMenu = $false,
     [switch]$SOfflineMode = $false,
     [switch]$SCareless = $false
 )
@@ -57,6 +58,15 @@ function SetupMachine {
                 # Visual studio
                 # install Visual Studio with downloaded config
                 winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
+            }
+        }
+
+        if ($RestoreOldRightClickMenu -or $SAll) {
+            if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
+                reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+            }
+            else {
+                Write-Host "Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
             }
         }
 

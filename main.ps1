@@ -23,6 +23,7 @@ param (
     [switch]$DarkMode = $false,
     [switch]$RemoveBloat = $false,
     [switch]$ShortcutCopying = $false,
+    [switch]$RestoreOldRightClickMenu = $false,
     [switch]$OfflineMode = $false,
     [switch]$Careless = $false
 )
@@ -119,7 +120,7 @@ function WaitForWinget {
 
 function StartSetup {
     Set-Location $env:TEMP\SetupScript
-    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SOfflineMode:$OfflineMode -SCareless:$Careless
+    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"
