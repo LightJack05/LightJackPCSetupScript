@@ -78,7 +78,7 @@ function SetupMachine {
             taskkill /IM powertoys.exe /f
             Start-Sleep 2
             # Extract archive to appdata folder
-            Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\ -Force
+            Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys -Force
         }
 
 
