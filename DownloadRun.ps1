@@ -15,8 +15,8 @@ else {
         mkdir $env:TEMP\SetupScript
     }
     else {
-        Write-Host '[SetupScript - ERROR] Failed to delete existing directory.' -ForegroundColor DarkRed
-        Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
+        Write-Host '[SetupScript - ERROR] Failed to delete existing directory.' -ForegroundColor Red
+        Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
         Pause
         Exit
     }
@@ -26,8 +26,8 @@ if ((Test-Path -Path $env:TEMP\SetupScript)) {
     Write-Host '[SetupScript - INFO] Successfully created directory.' -ForegroundColor Green
 }
 else {
-    Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
-    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
+    Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
+    Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
     Pause
     Exit
 }
