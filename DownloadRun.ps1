@@ -8,7 +8,7 @@ if (!(Test-Path -Path $env:TEMP\SetupScript)) {
     mkdir $env:TEMP\SetupScript
 }
 else {
-    Write-Host '[SetupScript - WARNING] %appdata%\SetupScript already exists. Burning it to the ground...' -ForegroundColor Yellow
+    Write-Host '[SetupScript - WARNING] %appdata%\SetupScript already exists. Burning it to the ground...' -ForegroundColor DarkYellow
     Remove-Item -r $env:TEMP\SetupScript
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
         Write-Host '[SetupScript - INFO] Creating temporary directory...' -ForegroundColor Green
@@ -23,7 +23,7 @@ else {
 }
 
 if ((Test-Path -Path $env:TEMP\SetupScript)) {
-    Write-Host '[SetupScript - INFO] Sucessfully created directory.' -ForegroundColor Green
+    Write-Host '[SetupScript - INFO] Successfully created directory.' -ForegroundColor Green
 }
 else {
     Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
@@ -37,7 +37,7 @@ curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/fancy/
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/fancy/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
 
 if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\setup.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\RunMeAsAdmin.bat)) {
-    Write-Host '[SetupScript - INFO] Sucessfully cloned files.' -ForegroundColor Green
+    Write-Host '[SetupScript - INFO] Successfully cloned files.' -ForegroundColor Green
 }
 else {
     Write-Host '[SetupScript - ERROR] Failed to download one or more required files.' -ForegroundColor Red

@@ -15,6 +15,8 @@ param (
 
 
 function SetupMachine {
+    # Change title to working
+    $host.ui.RawUI.WindowTitle = "Setup Script: Working"
 
 
 
@@ -46,7 +48,7 @@ function SetupMachine {
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
             }
             else {
-                Write-Host "WARNING: Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
+                Write-Host "[SetupScript - WARNING] Restoring the old menu is not available on Windows 10." -ForegroundColor DarkYellow
             }
         }
 
@@ -143,6 +145,8 @@ function SetupMachine {
         Remove-Item -r $env:TEMP\SetupScript
         Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
         Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
+        # Change Title to completed
+        $host.ui.RawUI.WindowTitle = "Setup Script: Completed"
     }
 }
 

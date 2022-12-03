@@ -29,6 +29,9 @@ param (
 )
 
 function Main {
+    # Change title to initializing
+    $host.ui.RawUI.WindowTitle = "Setup Script: Initializing"
+
     # Function called on execution
     Write-Host "[SetupScript - INFO] Welcome! Setup will start in 5 seconds." -ForegroundColor Green
     Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C or close this window." -ForegroundColor Green
@@ -46,6 +49,7 @@ function Main {
         else {
             Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor Red
             Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor Red
+            $host.ui.RawUI.WindowTitle = "Setup Script: ERROR"
             Pause
             Exit
         }
