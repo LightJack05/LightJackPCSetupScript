@@ -59,18 +59,18 @@ function Main {
         if ($Software -or $All) {
             # Download winget json file
             Write-Host '[SetupScript - INFO] Downloading Winget JSON file...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/fancy/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
             Write-Host '[SetupScript - INFO] Donwloading PowerToys Settings archive...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/fancy/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
         if ($VisualStudio -or $All) {
             # Download the vsconfig file for installation
             Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/fancy/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
     }
 
