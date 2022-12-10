@@ -53,7 +53,7 @@ function SetupMachine {
         }
 
         if ($SDarkMode -or $SAll) {
-            Write-Host 'Applying dark mode...'
+            Write-Host '[SetupScript - INFO] Applying dark mode...' -ForegroundColor Green
             # Apply dark theme (theme for Windows 11, App dark mode for Windows 10)
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
                 c:\Windows\Resources\Themes\dark.theme
