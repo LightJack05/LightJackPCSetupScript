@@ -42,7 +42,7 @@ function SetupMachine {
 
         Write-Host '[SetupScript - INFO] Changing Settings...' -ForegroundColor Green
 
-        if ($RestoreOldRightClickMenu -or $SAll) {
+        if ($SRestoreOldRightClickMenu -or $SAll) {
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
                 Write-Host '[SetupScript - INFO] Restoring the old right-click menu...' -ForegroundColor Green
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
