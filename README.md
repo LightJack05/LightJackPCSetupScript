@@ -3,7 +3,7 @@ This is the script I use for setting up my PC.
 It's a simple Powershell script that you can modify for your own usecase.
 
 ## Usecase
-The script is intended to make setup of a new machine or a new Windows install easier. It can install programs, change settings, change themes, start updates, etc. Basically everything you can do from powershell!
+The script is intended to make setup of a new machine or a new Windows install easier. It can install programs, change settings, change themes, start updates, etc. Basically everything you can do from powershell.
 
 ## Using the script for yourself
 The script is intended to be used together with a Github repo. It will download itself and the required files from there.
@@ -18,7 +18,7 @@ The script is intended to be used together with a Github repo. It will download 
     * main.ps1 (3 lines)
 
 ## Changing the things the script does.
-By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own Repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
+By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
 * Software (-Software) installs software specified in the winget.json.
 * Discord (-Discord) installs Discord.
 * Power Toys Settings (-PowerToysSettings) downloads a PowerToys.zip that contains powertoys settings and copies it into appdata.
@@ -27,6 +27,7 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * Dark Mode (-DarkMode) enables windows dark mode (Apps for Windows 10 and Dark Theme for Windows 11)
 * Remove Bloatware (-RemoveBloat) removes Solitare and Skype
 * Shortcut Copying (-ShortcutCopying) copies shortcuts from Onedrive into your start menu folder (very specific to my usecase.)
+* Restore old right click menu (-RestoreOldRightClickMenu) restores the old right-click menu in Windows 11. (This step is skipped with a warning on Windows 10.)
 
 ## Additional Options
 * Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
