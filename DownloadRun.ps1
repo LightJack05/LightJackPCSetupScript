@@ -1,6 +1,6 @@
 # Intended to run the script with just a one-liner.
 # Run this command:
-# $Command = curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/DownloadRun.ps1 -UseBasicParsing; Invoke-Expression $Command
+# $Command = curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/DownloadRun.ps1 -UseBasicParsing; Invoke-Expression $Command
 
 Write-Host '[SetupScript - INFO] Creating temporary directory and cloning required files...' -ForegroundColor Green
 
@@ -32,9 +32,9 @@ else {
     Exit
 }
 
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/main.ps1 -o $env:TEMP\SetupScript\main.ps1
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/main.ps1 -o $env:TEMP\SetupScript\main.ps1
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
 
 if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\setup.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\RunMeAsAdmin.bat)) {
     Write-Host '[SetupScript - INFO] Successfully cloned files.' -ForegroundColor Green
