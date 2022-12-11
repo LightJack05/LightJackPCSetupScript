@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -File %0\..\main.ps1 -All
+powershell.exe -ExecutionPolicy Bypass -File %0\..\main.ps1 -Software -Discord -PowerToysSettings -VisualStudio -UpdateStoreApps -DarkMode -RemoveBloat -ShortcutCopying
