@@ -28,6 +28,7 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * Remove Bloatware (-RemoveBloat) removes Solitare and Skype
 * Shortcut Copying (-ShortcutCopying) copies shortcuts from Onedrive into your start menu folder (very specific to my usecase.)
 * Restore old right click menu (-RestoreOldRightClickMenu) restores the old right-click menu in Windows 11. (This step is skipped with a warning on Windows 10.)
+* Windows Terminal settings copying (-WindowsTerminal) copies a settings.json for Windows Terminal into the config folder.
 
 ## Additional Options
 * Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
