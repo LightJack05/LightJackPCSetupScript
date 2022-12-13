@@ -24,6 +24,7 @@ param (
     [switch]$RemoveBloat = $false,
     [switch]$ShortcutCopying = $false,
     [switch]$RestoreOldRightClickMenu = $false,
+    [switch]$WindowsTerminal = $false,
     [switch]$OfflineMode = $false,
     [switch]$Careless = $false
 )
@@ -67,7 +68,7 @@ function Main {
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
-            Write-Host '[SetupScript - INFO] Donwloading PowerToys Settings archive...' -ForegroundColor Green
+            Write-Host '[SetupScript - INFO] Downloading PowerToys Settings archive...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Windows-Terminal-Config/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
@@ -75,6 +76,11 @@ function Main {
             # Download the vsconfig file for installation
             Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Windows-Terminal-Config/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+        }
+
+        if ($WindowsTerminal -or $All) {
+            Write-Host '[SetupScript - INFO] Downloading Windows Terminal configuration...' -ForegroundColor Green
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Windows-Terminal-Config/settings.json -o $env:TEMP\SetupScript\settings.json
         }
     }
 
@@ -143,7 +149,7 @@ function WaitForWinget {
 function StartSetup {
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
-    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SOfflineMode:$OfflineMode -SCareless:$Careless
+    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"

@@ -15,7 +15,7 @@ The script is intended to be used together with a Github repo. It will download 
     * Other files you might need (e.g. PowerToys.zip, .vsconfig, etc.)
 3. Replace the default links with yours in the following files:
     * DownloadRun.bat (4 lines, watch the commented out one-liner)
-    * main.ps1 (3 lines)
+    * main.ps1 (4 lines)
 
 ## Changing the things the script does.
 By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):

@@ -9,6 +9,7 @@ param (
     [switch]$SRemoveBloat = $false,
     [switch]$SShortcutCopying = $false,
     [switch]$SRestoreOldRightClickMenu = $false,
+    [switch]$SWindowsTerminal = $false,
     [switch]$SOfflineMode = $false,
     [switch]$SCareless = $false
 )
@@ -63,47 +64,47 @@ function SetupMachine {
             }
         }
 
-        if (!$SOfflineMode) {
-            Write-Host '[SetupScript - INFO] Installing specified Software...' -ForegroundColor Green
-            if ($SSoftware -or $SAll) {
 
-                # Install the specified software
-                # Change/replace the winget.json to change the software that will be installed.
-                if (Test-Path -Path $env:TEMP\SetupScript\winget.json) {
-                    Write-Host '[SetupScript - INFO] Importing the Winget JSON file...' -ForegroundColor Green
-                    winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
-                }
-                else {
-                    Write-Host '[SetupScript - ERROR] Could not find JSON file for import. Skipping this step...' -ForegroundColor Green
-                }
+        Write-Host '[SetupScript - INFO] Installing specified Software...' -ForegroundColor Green
+        if ($SSoftware -or $SAll) {
+
+            # Install the specified software
+            # Change/replace the winget.json to change the software that will be installed.
+            if (Test-Path -Path $env:TEMP\SetupScript\winget.json) {
+                Write-Host '[SetupScript - INFO] Importing the Winget JSON file...' -ForegroundColor Green
+                winget import $env:TEMP\SetupScript\winget.json --accept-source-agreements --accept-package-agreements
             }
-
-            if ($SDiscord -or $SAll) {
-                Write-Host '[SetupScript - INFO] Installing Discord...' -ForegroundColor Green
-                # Installing discord separately since it requires special arguments
-                winget install Discord.Discord --source winget --override "-s" --accept-source-agreements --accept-package-agreements
-            }
-
-            if ($SUpdateStoreApps -or $SAll) {
-                Write-Host '[SetupScript - INFO] Kickstarting Windows Store Updates...' -ForegroundColor Green
-                # Kickstart store updates
-                Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
-            }
-
-            if ($SVisualStudio -or $SAll) {
-
-                # Visual studio
-                # install Visual Studio with downloaded config
-                if (Test-Path -Path $env:TEMP\SetupScript\.vsconfig) {
-                    Write-Host '[SetupScript - INFO] Installing Visual Studio with .vsconfig file...' -ForegroundColor Green
-                    winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
-                }
-                else {
-                    Write-Host '[SetupScript - ERROR] Could not find VSConfig file. Skipping this step...' -ForegroundColor Green
-                }
-
+            else {
+                Write-Host '[SetupScript - ERROR] Could not find JSON file for import. Skipping this step...' -ForegroundColor Green
             }
         }
+
+        if ($SDiscord -or $SAll) {
+            Write-Host '[SetupScript - INFO] Installing Discord...' -ForegroundColor Green
+            # Installing discord separately since it requires special arguments
+            winget install Discord.Discord --source winget --override "-s" --accept-source-agreements --accept-package-agreements
+        }
+
+        if ($SUpdateStoreApps -or $SAll) {
+            Write-Host '[SetupScript - INFO] Kickstarting Windows Store Updates...' -ForegroundColor Green
+            # Kickstart store updates
+            Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+        }
+
+        if ($SVisualStudio -or $SAll) {
+
+            # Visual studio
+            # install Visual Studio with downloaded config
+            if (Test-Path -Path $env:TEMP\SetupScript\.vsconfig) {
+                Write-Host '[SetupScript - INFO] Installing Visual Studio with .vsconfig file...' -ForegroundColor Green
+                winget install Microsoft.VisualStudio.2022.Community --override "--passive --config %temp%\SetupScript\.vsconfig" --accept-source-agreements --accept-package-agreements
+            }
+            else {
+                Write-Host '[SetupScript - WARN] Could not find VSConfig file. Skipping this step...' -ForegroundColor Yellow
+            }
+
+        }
+
 
         if ($SPowerToysSettings -or $SAll) {
             if (Test-Path -Path $env:TEMP\SetupScript\powertoys.zip) {
@@ -116,7 +117,18 @@ function SetupMachine {
                 Expand-Archive -Path $env:TEMP\SetupScript\PowerToys.zip -DestinationPath $env:APPDATA\..\Local\Microsoft\PowerToys -Force
             }
             else {
-                Write-Host '[SetupScript - ERROR] Could not find PowerToys zip file. Skipping this step...' -ForegroundColor Green
+                Write-Host '[SetupScript - WARN] Could not find PowerToys zip file. Skipping this step...' -ForegroundColor Yellow
+            }
+        }
+
+        if ($SWindowsTerminal -or $SAll) {
+            if (Test-Path -Path $env:TEMP\SetupScript\settings.json) {
+                Write-Host '[SetupScript - INFO] Copying Windows Terminal Settings...' -ForegroundColor Green
+                Copy-Item $env:TEMP\SetupScript\settings.json $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+
+            }
+            else {
+                Write-Host '[SetupScript - WARN] Could not find Windows Terminal settings file. Skipping this step...' -ForegroundColor Yellow
             }
         }
 
