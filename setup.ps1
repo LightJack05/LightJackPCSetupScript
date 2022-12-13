@@ -49,7 +49,7 @@ function SetupMachine {
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
             }
             else {
-                Write-Host "[SetupScript - WARNING] Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
+                Write-Host "[SetupScript - WARN] Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
             }
         }
 
