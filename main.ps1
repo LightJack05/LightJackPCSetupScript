@@ -24,6 +24,7 @@ param (
     [switch]$RemoveBloat = $false,
     [switch]$ShortcutCopying = $false,
     [switch]$RestoreOldRightClickMenu = $false,
+    [switch]$WindowsTerminal = $false,
     [switch]$OfflineMode = $false,
     [switch]$Careless = $false
 )
@@ -76,6 +77,12 @@ function Main {
             Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
+
+        if ($WindowsTerminal -or $All) {
+            Write-Host '[SetupScript - INFO] Downloading Windows Terminal configuration...' -ForegroundColor Green
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/settings.json -o $env:TEMP\SetupScript\settings.json
+        }
+
     }
 
 
@@ -143,7 +150,7 @@ function WaitForWinget {
 function StartSetup {
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
-    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SOfflineMode:$OfflineMode -SCareless:$Careless
+    .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"

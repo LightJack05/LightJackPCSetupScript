@@ -15,7 +15,7 @@ The script is intended to be used together with a Github repo. It will download 
     * Other files you might need (e.g. PowerToys.zip, .vsconfig, etc.)
 3. Replace the default links with yours in the following files:
     * DownloadRun.bat (4 lines, watch the commented out one-liner)
-    * main.ps1 (3 lines)
+    * main.ps1 (4 lines)
 
 ## Changing the things the script does.
 By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
@@ -28,6 +28,7 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * Remove Bloatware (-RemoveBloat) removes Solitare and Skype
 * Shortcut Copying (-ShortcutCopying) copies shortcuts from Onedrive into your start menu folder (very specific to my usecase.)
 * Restore old right click menu (-RestoreOldRightClickMenu) restores the old right-click menu in Windows 11. (This step is skipped with a warning on Windows 10.)
+* Windows Terminal settings copying (-WindowsTerminal) copies a settings.json for Windows Terminal into the config folder.
 
 ## Additional Options
 * Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
