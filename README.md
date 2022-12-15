@@ -36,4 +36,4 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * All (-All) will use all components in the script.
 
 ## Using the script
-The script contains a one-liner in the file "DownloadRun.bat" (note that the link has to be changed to your repo) that is written as a comment. Copy that (without the '#') and put it in a powershell (admin) and hit enter. It will download the script and execute it.
+The script contains a one-liner in the file "DownloadRun.ps1" (note that the link has to be changed to your repo) that is written as a comment. Copy that (without the '#') and put it in a powershell (admin) and hit enter. It will download the script and execute it.
