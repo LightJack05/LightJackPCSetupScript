@@ -8,7 +8,7 @@ if (!(Test-Path -Path $env:TEMP\SetupScript)) {
     mkdir $env:TEMP\SetupScript
 }
 else {
-    Write-Host '[SetupScript - WARN] %appdata%\SetupScript already exists. Burning it to the ground...' -ForegroundColor Yellow
+    Write-Host '[SetupScript - WARN] %temp%\SetupScript already exists. Burning it to the ground...' -ForegroundColor Yellow
     Remove-Item -r $env:TEMP\SetupScript
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
         Write-Host '[SetupScript - INFO] Creating temporary directory...' -ForegroundColor Green
