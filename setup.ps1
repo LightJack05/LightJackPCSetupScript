@@ -122,19 +122,18 @@ function SetupMachine {
         }
 
         if ($SWindowsTerminal -or $SAll) {
+            # Check if the Windows Terminal config exists
             if (Test-Path -Path $env:TEMP\SetupScript\settings.json) {
+                # Copy the file if it exists
                 Write-Host '[SetupScript - INFO] Copying Windows Terminal Settings...' -ForegroundColor Green
                 Copy-Item $env:TEMP\SetupScript\settings.json $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
 
             }
             else {
+                # Skip with warning if the config file is not found
                 Write-Host '[SetupScript - WARN] Could not find Windows Terminal settings file. Skipping this step...' -ForegroundColor Yellow
             }
         }
-
-        # Update installed desktop applications
-        #Write-Host "Updating currently installed software"
-        #winget upgrade --all
 
 
         if ($SRemoveBloat -or $SAll) {

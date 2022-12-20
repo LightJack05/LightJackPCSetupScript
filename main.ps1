@@ -79,6 +79,7 @@ function Main {
         }
 
         if ($WindowsTerminal -or $All) {
+            # Download Windows Terminal configuration file
             Write-Host '[SetupScript - INFO] Downloading Windows Terminal configuration...' -ForegroundColor Green
             curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/settings.json -o $env:TEMP\SetupScript\settings.json
         }
