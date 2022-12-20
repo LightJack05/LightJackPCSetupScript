@@ -33,9 +33,9 @@ function Main {
     # Change title to initializing
     $host.ui.RawUI.WindowTitle = "Setup Script: Initializing"
 
-    # Function called on execution
+    # Wait 5 seconds so the user has a chance to cancel
     Write-Host "[SetupScript - INFO] Welcome! Setup will start in 5 seconds." -ForegroundColor Green
-    Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C or close this window." -ForegroundColor Green
+    Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C." -ForegroundColor Green
     Start-Sleep 5
 
 
@@ -48,6 +48,7 @@ function Main {
             Write-Host '[SetupScript - INFO] Sucessfully created directory.' -ForegroundColor Green
         }
         else {
+            # If the directory can't be created, error out.
             Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
             Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
             $host.ui.RawUI.WindowTitle = "Setup Script: ERROR"
@@ -149,6 +150,7 @@ function WaitForWinget {
 }
 
 function StartSetup {
+    # Move to temp directory, then start setup.ps1 with given arguments
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
     .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
