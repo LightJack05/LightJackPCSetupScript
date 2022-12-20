@@ -44,11 +44,14 @@ function SetupMachine {
         Write-Host '[SetupScript - INFO] Changing Settings...' -ForegroundColor Green
 
         if ($SRestoreOldRightClickMenu -or $SAll) {
+            # Check windows version the script is running on
             if ((Get-CimInstance Win32_OperatingSystem).version.substring(5) -gt 21999) {
+                # On Windows 11 change the registry key to restore the old rightclick menu.
                 Write-Host '[SetupScript - INFO] Restoring the old right-click menu...' -ForegroundColor Green
                 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
             }
             else {
+                # On Windows 10 skip this step with a warning
                 Write-Host "[SetupScript - WARN] Restoring the old menu is not available on Windows 10." -ForegroundColor Yellow
             }
         }
@@ -122,19 +125,18 @@ function SetupMachine {
         }
 
         if ($SWindowsTerminal -or $SAll) {
+            # Check if the Windows Terminal config exists
             if (Test-Path -Path $env:TEMP\SetupScript\settings.json) {
+                # Copy the file if it exists
                 Write-Host '[SetupScript - INFO] Copying Windows Terminal Settings...' -ForegroundColor Green
                 Copy-Item $env:TEMP\SetupScript\settings.json $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
 
             }
             else {
+                # Skip with warning if the config file is not found
                 Write-Host '[SetupScript - WARN] Could not find Windows Terminal settings file. Skipping this step...' -ForegroundColor Yellow
             }
         }
-
-        # Update installed desktop applications
-        #Write-Host "Updating currently installed software"
-        #winget upgrade --all
 
 
         if ($SRemoveBloat -or $SAll) {

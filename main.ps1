@@ -33,9 +33,9 @@ function Main {
     # Change title to initializing
     $host.ui.RawUI.WindowTitle = "Setup Script: Initializing"
 
-    # Function called on execution
+    # Wait 5 seconds so the user has a chance to cancel
     Write-Host "[SetupScript - INFO] Welcome! Setup will start in 5 seconds." -ForegroundColor Green
-    Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C or close this window." -ForegroundColor Green
+    Write-Host "[SetupScript - INFO] To cancel, press Ctrl+C." -ForegroundColor Green
     Start-Sleep 5
 
 
@@ -48,6 +48,7 @@ function Main {
             Write-Host '[SetupScript - INFO] Sucessfully created directory.' -ForegroundColor Green
         }
         else {
+            # If the directory can't be created, error out.
             Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
             Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
             $host.ui.RawUI.WindowTitle = "Setup Script: ERROR"
@@ -64,24 +65,26 @@ function Main {
         if ($Software -or $All) {
             # Download winget json file
             Write-Host '[SetupScript - INFO] Downloading Winget JSON file...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
-            Write-Host '[SetupScript - INFO] Downloading PowerToys Settings archive...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+            Write-Host '[SetupScript - INFO] Donwloading PowerToys Settings archive...' -ForegroundColor Green
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
         if ($VisualStudio -or $All) {
             # Download the vsconfig file for installation
             Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
 
         if ($WindowsTerminal -or $All) {
+            # Download Windows Terminal configuration file
             Write-Host '[SetupScript - INFO] Downloading Windows Terminal configuration...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/settings.json -o $env:TEMP\SetupScript\settings.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/LightJack-Typical/settings.json -o $env:TEMP\SetupScript\settings.json
         }
+
     }
 
 
@@ -147,6 +150,7 @@ function WaitForWinget {
 }
 
 function StartSetup {
+    # Move to temp directory, then start setup.ps1 with given arguments
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
     .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
