@@ -3,19 +3,19 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
         {
-            "command": {
-                "action": "copy",
-                "singleLine": false
-            },
-            "keys": "ctrl+c"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": "paste",
             "keys": "ctrl+v"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "command": {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
         },
         {
             "command": {
@@ -68,6 +68,18 @@
                 "name": "PowerShell (Admin)",
                 "opacity": 83,
                 "startingDirectory": "%USERPROFILE%",
+                "useAcrylic": true
+            },
+            {
+                "colorScheme": "Campbell",
+                "commandline": "\"%localappdata%\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
+                "guid": "{f2d39bc9-9ed5-4356-b57b-807c9b453675}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "Android Debug Bridge (PowerShell)",
+                "opacity": 83,
+                "startingDirectory": "%userprofile%\\OneDrive\\Programme\\Programs\\platform-tools",
+                "tabTitle": "Android Debug Bridge (PowerShell)",
                 "useAcrylic": true
             },
             {
