@@ -153,14 +153,7 @@ function SetupMachine {
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
         }
 
-        # Delete remaining files that are no longer needed, including the temp directory
-        Write-Host '[SetupScript - INFO] Cleaning up...'
-        Set-Location $env:USERPROFILE
-        Remove-Item -r $env:TEMP\SetupScript
-        Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
-        Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
-        # Change Title to completed
-        $host.ui.RawUI.WindowTitle = "Setup Script: Completed"
+
     }
 }
 

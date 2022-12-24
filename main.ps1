@@ -154,6 +154,15 @@ function StartSetup {
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
     Set-Location $env:TEMP\SetupScript
     .\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
+
+    # Delete remaining files that are no longer needed, including the temp directory
+    Write-Host '[SetupScript - INFO] Cleaning up...'
+    Set-Location $env:USERPROFILE
+    Remove-Item -r $env:TEMP\SetupScript
+    Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
+    Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
+    # Change Title to completed
+    $host.ui.RawUI.WindowTitle = "Setup Script: Completed"
 }
 
 # Call entry function "Main"
