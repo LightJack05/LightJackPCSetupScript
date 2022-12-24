@@ -1,6 +1,5 @@
-# My PC setup script
-This is the script I use for setting up my PC.
-It's a simple Powershell script that you can modify for your own usecase.
+# Branch of my PC Setup Script
+This is a branch of my PC Setup Script that is customized for Vimlark.
 
 ## Usecase
 The script is intended to make setup of a new machine or a new Windows install easier. It can install programs, change settings, change themes, start updates, etc. Basically everything you can do from powershell.
