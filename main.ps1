@@ -66,24 +66,24 @@ function Main {
         if ($Software -or $All) {
             # Download winget json file
             Write-Host '[SetupScript - INFO] Downloading Winget JSON file...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/winget.json -o $env:TEMP\SetupScript\winget.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/WSL/winget.json -o $env:TEMP\SetupScript\winget.json
         }
         if ($PowerToysSettings -or $All) {
             # Download powertoys zip archive
             Write-Host '[SetupScript - INFO] Donwloading PowerToys Settings archive...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/WSL/PowerToys.zip -o $env:TEMP\SetupScript\PowerToys.zip
         }
 
         if ($VisualStudio -or $All) {
             # Download the vsconfig file for installation
             Write-Host '[SetupScript - INFO] Downloading Visual Studio configuration...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/WSL/.vsconfig -o $env:TEMP\SetupScript\.vsconfig
         }
 
         if ($WindowsTerminal -or $All) {
             # Download Windows Terminal configuration file
             Write-Host '[SetupScript - INFO] Downloading Windows Terminal configuration...' -ForegroundColor Green
-            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/main/settings.json -o $env:TEMP\SetupScript\settings.json
+            curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/WSL/settings.json -o $env:TEMP\SetupScript\settings.json
         }
 
     }

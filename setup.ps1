@@ -166,6 +166,7 @@ function SetupMachine {
             Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
             Remove-Item -r $env:TEMP\SetupScript
 
+            $host.ui.RawUI.WindowTitle = "Setup Script: Rebooting..."
             # Wait 10 seconds before reboot and warn the user
             Write-Host '[SetupScript - WARNING] Your PC needs to reboot to complete WSL installation.' --ForegroundColor Yellow
             Write-Host '[SetupScript - WARNING] After the reboot, please complete the remaining setup steps for WSL. They should start automatically.' --ForegroundColor Yellow
