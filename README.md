@@ -1,22 +1,30 @@
 # Branch of my PC Setup Script
-This is a branch of my PC Setup Script that is customized for Vimlark.
+__NOTE: This is a branch of my PC Setup Script that is customized for Vimlark. To look at the standard version, please go to the 'main' branch.__
 
-## Usecase
-The script is intended to make setup of a new machine or a new Windows install easier. It can install programs, change settings, change themes, start updates, etc. Basically everything you can do from powershell.
+## Instructions for Vimlark
+### Command
 
-## Using the script for yourself
-The script is intended to be used together with a Github repo. It will download itself and the required files from there.
-1. Create a new Github repo or fork mine.
-2. Get the raw links for the required files. (Click on the file > Raw > Copy the link)
-    * RunMeAsAdmin.bat
-    * main.ps1
-    * setup.ps1
-    * Other files you might need (e.g. PowerToys.zip, .vsconfig, etc.), should you choose to use those features.
-3. Replace the default links with yours in the following files:
-    * DownloadRun.bat (4 lines, watch the commented-out one-liner)
-    * main.ps1 (4 lines)
+```powershell
+$Command = curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim/DownloadRun.ps1 -UseBasicParsing; Invoke-Expression $Command
+```
+(This entire thing is one line)
 
-## Script module aruments
+### Execution
+- Open a new Powershell as Admin
+(Right click on Start > Windows PowerShell (Admin))
+- Paste the command from above into the PowerShell Window (right click or Ctrl + V)
+
+### Setup steps
+- Winget installation (MS Store should pop up)
+- Dark mode
+- Software (specified in winget.json)
+- Completion (Title changes to "Completed")
+
+### Cancel execution
+- Hit Ctrl + C, then confirm with 'Y'
+
+
+## Available modules
 By default the "-All" option is enabled in "DownloadRun.bat". You may change that on your own repository and choose from these components (Add -ComponentName to the command to add it, or -All to use all.):
 * Software (-Software) installs general software specified in the winget.json.
 * Discord (-Discord) installs Discord.
@@ -29,18 +37,7 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * Restore old right click menu (-RestoreOldRightClickMenu) restores the old right-click menu in Windows 11. (This step is skipped with a warning on Windows 10.)
 * Windows Terminal settings copying (-WindowsTerminal) copies a settings.json for Windows Terminal into the config folder.
 
-## Changing the software that is installed by the -Software option
-You may change the software the script installs with the -Software option. To do that, open the winget.json file and change the entries that are in there. Software specified like this: "Microsoft.DotNet.DesktopRuntime.7" is specified in the top part of the list. Those are generally desktop applications.
-
-To find the identifier of your application, you can use 'winget search "{querry}" ' (replace {querry} with what you want to search for.)
-You may add or remove applications as you see fit. You can also generate a winget.json file from your current software installed using the "winget export" command.
-
-Windows Store Apps should be specified in the lower part of the json file. Those are referenced with an ID, rather than with an identifier name.
-
-## Additional Options
+## Additional options
 * Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
 * Careless Mode (-Careless) will run the script in a more careless manner. This is currently unused and will simply exit. This will also skip winget installation.
 * All (-All) will use all components in the script.
-
-## Executing the script
-The script contains a one-liner in the file "DownloadRun.ps1" (note that the link in it has to be changed to your repo) that is written as a comment. Copy that (without the '#') and put it in a powershell (admin) and hit enter. It will download the script and execute it.
