@@ -10,6 +10,7 @@ param (
     [switch]$SShortcutCopying = $false,
     [switch]$SRestoreOldRightClickMenu = $false,
     [switch]$SWindowsTerminal = $false,
+    [switch]$SWSL = $false,
     [switch]$SOfflineMode = $false,
     [switch]$SCareless = $false
 )
@@ -153,14 +154,45 @@ function SetupMachine {
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
         }
 
-        # Delete remaining files that are no longer needed, including the temp directory
-        Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
-        Remove-Item -r $env:TEMP\SetupScript
-        Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
-        Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
-        # Change Title to completed
-        $host.ui.RawUI.WindowTitle = "Setup Script: Completed"
+        if ($SWSL -or $SAll) {
+
+            Write-Host '[SetupScript - INFO] Installing WSL.' -ForegroundColor Green
+            Write-Host '[SetupScript - INFO] NOTE: There will be a UAC popup in a couple seconds, please confirm that.' -ForegroundColor Green
+            Start-Sleep 10
+            wsl --install
+
+
+            #  Delete remaining  files that are no longer needed, including the temp directory
+            Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
+            Remove-Item -r $env:TEMP\SetupScript
+
+            # Wait 10 seconds before reboot and warn the user
+            Write-Host '[SetupScript - WARNING] Your PC needs to reboot to complete WSL installation.' --ForegroundColor Yellow
+            Write-Host '[SetupScript - WARNING] After the reboot, please complete the remaining setup steps for WSL. They should start automatically.' --ForegroundColor Yellow
+            Write-Host '[SetupScript - WARNING] Rebooting in 10...' --ForegroundColor Yellow
+            Start-Sleep 5
+            Write-Host '[SetupScript - WARNING] Rebooting in 5...' --ForegroundColor Yellow
+            Start-Sleep 1
+            Write-Host '[SetupScript - WARNING] Rebooting in 4...' --ForegroundColor Yellow
+            Start-Sleep 1
+            Write-Host '[SetupScript - WARNING] Rebooting in 3...' --ForegroundColor Yellow
+            Start-Sleep 1
+            Write-Host '[SetupScript - WARNING] Rebooting in 2...' --ForegroundColor Yellow
+            Start-Sleep 1
+            Write-Host '[SetupScript - WARNING] Rebooting in 1...' --ForegroundColor Yellow
+            Start-Sleep 1
+            shutdown -r -t 0
+        }
+        else {
+
+            #  Delete remaiSning  files that are no longer needed, including the temp directory
+            Write-Host '[SetupScript - INFO] Cleaning up...' -ForegroundColor Green
+            Remove-Item -r $env:TEMP\SetupScript
+            Write-Host '[SetupScript - INFO] Setup has been completed. Press any key to exit.' -ForegroundColor Green
+            Write-Host '[SetupScript - INFO] You may need to reboot for all changes to take effect.' -ForegroundColor Green
+            # Change Title to completed
+            $host.ui.RawUI.WindowTitle = "Setup Script: Completed"
+        }
+
     }
 }
-
-SetupMachine

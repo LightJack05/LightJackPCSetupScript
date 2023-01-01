@@ -25,6 +25,7 @@ param (
     [switch]$ShortcutCopying = $false,
     [switch]$RestoreOldRightClickMenu = $false,
     [switch]$WindowsTerminal = $false,
+    [switch]$WSL = $false,
     [switch]$OfflineMode = $false,
     [switch]$Careless = $false
 )
@@ -152,7 +153,7 @@ function WaitForWinget {
 function StartSetup {
     # Move to temp directory, then start setup.ps1 with given arguments
     Write-Host '[SetupScript - INFO] Initiating Setup...' -ForegroundColor Green
-    & $env:TEMP\SetupScript\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SOfflineMode:$OfflineMode -SCareless:$Careless
+    & $env:TEMP\SetupScript\setup.ps1 -SAll:$All -SSoftware:$Software -SDiscord:$Discord -SPowerToysSettings:$PowerToysSettings -SVisualStudio:$VisualStudio -SUpdateStoreApps:$UpdateStoreApps -SDarkMode:$DarkMode -SRemoveBloat:$RemoveBloat -SShortcutCopying:$ShortcutCopying -SRestoreOldRightClickMenu:$RestoreOldRightClickMenu -SWindowsTerminal:$WindowsTerminal -SWSL:$WSL -SOfflineMode:$OfflineMode -SCareless:$Careless
 }
 
 # Call entry function "Main"
