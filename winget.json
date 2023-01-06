@@ -6,60 +6,6 @@
             "Packages": [
                 {
                     "PackageIdentifier": "7zip.7zip"
-                },
-                {
-                    "PackageIdentifier": "GIMP.GIMP"
-                },
-                {
-                    "PackageIdentifier": "GitHub.GitHubDesktop"
-                },
-                {
-                    "PackageIdentifier": "Git.Git"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.WindowsTerminal"
-                },
-                {
-                    "PackageIdentifier": "Parsec.Parsec"
-                },
-                {
-                    "PackageIdentifier": "Valve.Steam"
-                },
-                {
-                    "PackageIdentifier": "Unity.UnityHub"
-                },
-                {
-                    "PackageIdentifier": "Balena.Etcher"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.WindowsSDK"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.VisualStudioCode"
-                },
-                {
-                    "PackageIdentifier": "Python.Python.3.11"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.DotNet.Runtime.3_1"
-                },
-                {
-                    "PackageIdentifier": "VMware.WorkstationPlayer"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.WindowsSDK"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.PowerToys"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.7"
-                },
-                {
-                    "PackageIdentifier": "Microsoft.OpenJDK.17"
                 }
             ],
             "SourceDetails": {
@@ -73,24 +19,6 @@
             "Packages": [
                 {
                     "PackageIdentifier": "9MZ1SNWT0N5D"
-                },
-                {
-                    "PackageIdentifier": "9WZDNCRFJ3TJ"
-                },
-                {
-                    "PackageIdentifier": "9P6RC76MSMMJ"
-                },
-                {
-                    "PackageIdentifier": "9NKSQGP7F2NH"
-                },
-                {
-                    "PackageIdentifier": "9MXPGWNZQVSX"
-                },
-                {
-                    "PackageIdentifier": "9PGJGD53TN86"
-                },
-                {
-                    "PackageIdentifier": "9WZDNCRFJ1P3"
                 }
             ],
             "SourceDetails": {
