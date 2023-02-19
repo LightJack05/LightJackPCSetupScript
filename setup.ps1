@@ -166,7 +166,7 @@ function SetupMachine {
             New-ItemProperty HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist -PropertyType String -Name 2 -Value $adblockKeyValue
             Write-Host "[SetupScript - INFO] Dark Reader..." -ForegroundColor Green
             New-ItemProperty HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist -PropertyType String -Name 3 -Value $darkReaderKeyValue
-            Write-Host "[SetupScript - INFO] I don't care about cookies..." -ForegroundColor Green
+            Write-Host "[SetupScript - INFO] I still don't care about cookies..." -ForegroundColor Green
             New-ItemProperty HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist -PropertyType String -Name 4 -Value $iDontCareAboutCookies
 
             # Disable system sounds
