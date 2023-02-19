@@ -1,6 +1,6 @@
 # Intended to run the script with just a one-liner.
 # Run this command:
-# $Command = curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-beta/DownloadRun.ps1 -UseBasicParsing; Invoke-Expression $Command
+# $Command = curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim/DownloadRun.ps1 -UseBasicParsing; Invoke-Expression $Command
 
 Write-Host '[SetupScript - INFO] Creating temporary directory and cloning required files...' -ForegroundColor Green
 
@@ -35,9 +35,9 @@ else {
     Exit
 }
 # Download core script files
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-beta/main.ps1 -o $env:TEMP\SetupScript\main.ps1
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-beta/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-beta/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim/main.ps1 -o $env:TEMP\SetupScript\main.ps1
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
 
 # Check if all files have been downloaded
 if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\setup.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\RunMeAsAdmin.bat)) {
