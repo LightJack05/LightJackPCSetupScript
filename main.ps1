@@ -49,7 +49,7 @@ function Main {
         }
         else {
             # If the directory can't be created, error out.
-            Write-Host '[SetupScript - ERROR] Failed to create temp directory at %appdata%\SetupScript.' -ForegroundColor DarkRed
+            Write-Host '[SetupScript - ERROR] Failed to create temp directory at %temp%\SetupScript.' -ForegroundColor DarkRed
             Write-Host '[SetupScript - ERROR] Unable to continue. Script will exit.' -ForegroundColor DarkRed
             $host.ui.RawUI.WindowTitle = "Setup Script: ERROR"
             Pause
