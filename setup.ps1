@@ -155,7 +155,12 @@ function SetupMachine {
         }
 
         if ($SVimlark) {
+            # Install adblock in chrome
+            $adblockKeyValue = "gighmmpiobklfepjocnamgkkbiglidom;https://clients2.google.com/service/update2/crx"
+            New-ItemProperty HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist -PropertyType String -Name 2 -Value $adblockKeyValue
 
+            # Disable system sounds
+            Get-ChildItem -Path "HKCU:\AppEvents\Schemes\Apps" | Get-ChildItem | Get-ChildItem | Where-Object { $_.PSChildName -eq ".Current" } | Set-ItemProperty -Name "(Default)" -Value ""
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
