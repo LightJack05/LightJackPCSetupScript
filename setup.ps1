@@ -10,6 +10,7 @@ param (
     [switch]$SShortcutCopying = $false,
     [switch]$SRestoreOldRightClickMenu = $false,
     [switch]$SWindowsTerminal = $false,
+    [switch]$SVimlark = $false,
     [switch]$SOfflineMode = $false,
     [switch]$SCareless = $false
 )
@@ -151,6 +152,10 @@ function SetupMachine {
             # Copy shortcuts for portable applications
             Write-Host '[SetupScript - INFO] Copying shortcuts. (Make sure onedrive has downloaded them!)' -ForegroundColor Green
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
+        }
+
+        if ($SVimlark) {
+
         }
 
         # Delete remaining files that are no longer needed, including the temp directory

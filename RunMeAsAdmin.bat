@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -File %0\..\main.ps1 -Software -UpdateStoreApps -DarkMode
+powershell.exe -ExecutionPolicy Bypass -File %0\..\main.ps1 -Software -UpdateStoreApps -DarkMode -Vimlark
