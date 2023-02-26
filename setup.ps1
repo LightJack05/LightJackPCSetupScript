@@ -170,7 +170,7 @@ function SetupMachine {
             New-ItemProperty HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist -PropertyType String -Name 4 -Value $iDontCareAboutCookies
 
             # Disable system sounds
-            Write-Host "[SetupScript - INFO] Applying silent windows sound profile." - -ForegroundColor Green
+            Write-Host "[SetupScript - INFO] Applying silent windows sound profile." -ForegroundColor Green
             Get-ChildItem -Path "HKCU:\AppEvents\Schemes\Apps" | Get-ChildItem | Get-ChildItem | Where-Object { $_.PSChildName -eq ".Current" } | Set-ItemProperty -Name "(Default)" -Value ""
         }
 
