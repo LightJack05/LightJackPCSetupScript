@@ -17,6 +17,9 @@
                     "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.7"
                 },
                 {
+                    "PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
+                },
+                {
                     "PackageIdentifier": "Oracle.JavaRuntimeEnvironment"
                 },
                 {
