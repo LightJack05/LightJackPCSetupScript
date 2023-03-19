@@ -174,7 +174,7 @@ function SetupMachine {
             Get-ChildItem -Path "HKCU:\AppEvents\Schemes\Apps" | Get-ChildItem | Get-ChildItem | Where-Object { $_.PSChildName -eq ".Current" } | Set-ItemProperty -Name "(Default)" -Value ""
 
             # Set Wallpaper
-            set-itemproperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $env:TEMP\SetupScript\Wallpaper.jpg
+            set-itemproperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $env:LOCALAPPDATA\SetupScript\Wallpaper.jpg
         }
 
         # Delete remaining files that are no longer needed, including the temp directory

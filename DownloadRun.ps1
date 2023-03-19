@@ -7,6 +7,7 @@ Write-Host '[SetupScript - INFO] Creating temporary directory and cloning requir
 # Create temp directory. If it already exists, delete it and recreate it.
 if (!(Test-Path -Path $env:TEMP\SetupScript)) {
     mkdir $env:TEMP\SetupScript
+    mkdir $env:LOCALAPPDATA\SetupScript
 }
 else {
     Write-Host '[SetupScript - WARN] %temp%\SetupScript already exists. Burning it to the ground...' -ForegroundColor Yellow
@@ -14,6 +15,7 @@ else {
     if (!(Test-Path -Path $env:TEMP\SetupScript)) {
         Write-Host '[SetupScript - INFO] Creating temporary directory...' -ForegroundColor Green
         mkdir $env:TEMP\SetupScript
+        mkdir $env:LOCALAPPDATA\SetupScript
     }
     else {
         # If unable to delete existing directory, error out.
@@ -38,7 +40,7 @@ else {
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/main.ps1 -o $env:TEMP\SetupScript\main.ps1
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
-curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/Wallpaper.jpg -o $env:TEMP\SetupScript\Wallpaper.jpg
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/Wallpaper.jpg -o $env:LOCALAPPDATA\SetupScript\Wallpaper.jpg
 
 # Check if all files have been downloaded
 if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\setup.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\RunMeAsAdmin.bat)) {
