@@ -38,6 +38,7 @@ else {
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/main.ps1 -o $env:TEMP\SetupScript\main.ps1
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/setup.ps1 -o $env:TEMP\SetupScript\setup.ps1
 curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/RunMeAsAdmin.bat -o $env:TEMP\SetupScript\RunMeAsAdmin.bat
+curl https://raw.githubusercontent.com/LightJack05/LightJackPCSetupScript/Vim-Development/Wallpaper.jpg -o $env:TEMP\SetupScript\Wallpaper.jpg
 
 # Check if all files have been downloaded
 if ((Test-Path -Path $env:TEMP\SetupScript\main.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\setup.ps1) -and (Test-Path -Path $env:TEMP\SetupScript\RunMeAsAdmin.bat)) {
