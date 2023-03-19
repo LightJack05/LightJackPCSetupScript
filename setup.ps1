@@ -173,8 +173,25 @@ function SetupMachine {
             Write-Host "[SetupScript - INFO] Applying silent windows sound profile." -ForegroundColor Green
             Get-ChildItem -Path "HKCU:\AppEvents\Schemes\Apps" | Get-ChildItem | Get-ChildItem | Where-Object { $_.PSChildName -eq ".Current" } | Set-ItemProperty -Name "(Default)" -Value ""
 
-            # Set Wallpaper
-            set-itemproperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $env:LOCALAPPDATA\SetupScript\Wallpaper.jpg
+            # Wallpaper
+            Add-Type -TypeDefinition @'
+using System.Runtime.InteropServices;
+public class Wallpaper {
+    public const uint SPI_SETDESKWALLPAPER = 0x0014;
+    public const uint SPIF_UPDATEINIFILE = 0x01;
+    public const uint SPIF_SENDWININICHANGE = 0x02;
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static extern int SystemParametersInfo (uint uAction, uint uParam, string lpvParam, uint fuWinIni);
+    public static void SetWallpaper (string path) {
+        SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, path, SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+    }
+}
+'@
+
+
+            $wallpaper = $env:LOCALAPPDATA + "\SetupScript\Wallpaper.jpg"  # absolute path to the image file
+            [Wallpaper]::SetWallpaper($wallpaper)
+
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
