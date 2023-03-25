@@ -11,7 +11,8 @@ param (
     [switch]$SRestoreOldRightClickMenu = $false,
     [switch]$SWindowsTerminal = $false,
     [switch]$SOfflineMode = $false,
-    [switch]$SCareless = $false
+    [switch]$SCareless = $false,
+    [switch]$SLightJack = $false
 )
 
 
@@ -151,6 +152,14 @@ function SetupMachine {
             # Copy shortcuts for portable applications
             Write-Host '[SetupScript - INFO] Copying shortcuts. (Make sure onedrive has downloaded them!)' -ForegroundColor Green
             Copy-Item $env:USERPROFILE\OneDrive\Programme\*.lnk $env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start` Menu\Programs
+        }
+
+        if ($SLightJack -or $SAll) {
+            # Create Hard Links for AppData
+            Write-Host '[SetupScript - INFO] Creating Hard-Links for Appdata folders...' -ForegroundColor Green
+
+            New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\Local\Microsoft\PowerToys -Target $env:USERPROFILE\OneDrive\AppData\Roaming\PowerToys
+            New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState -Target $env:USERPROFILE\OneDrive\AppData\Banana-Surface\WindowsTerminal
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
