@@ -159,7 +159,7 @@ function SetupMachine {
             Write-Host '[SetupScript - INFO] Creating Hard-Links for Appdata folders...' -ForegroundColor Green
 
             New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\Local\Microsoft\PowerToys -Target $env:USERPROFILE\OneDrive\AppData\Roaming\PowerToys
-            New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState -Target $env:USERPROFILE\OneDrive\AppData\Banana-Surface\WindowsTerminal
+            New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\LocalLow\5minlab -Target $env:USERPROFILE\OneDrive\AppData\Banana-PC\SaveData\BaamSquad\
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
