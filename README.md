@@ -41,3 +41,8 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 * Offline mode (-OfflineMode) will not download the files from the repo, but use the local files stored in %temp%\SetupScript\
 * Careless Mode (-Careless) will run the script in a more careless manner. This is currently unused and will simply exit. This will also skip winget installation.
 * All (-All) will use all components in the script.
+
+
+
+## Wallpaper Credit
+* Credit to @Sooparch on Discord for the Wallpaper
