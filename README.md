@@ -14,7 +14,7 @@ The script is intended to be used together with a Github repo. It will download 
     * setup.ps1
     * Other files you might need (e.g. PowerToys.zip, .vsconfig, etc.), should you choose to use those features.
 3. Replace the default links with yours in the following files:
-    * DownloadRun.bat (4 lines, watch the commented-out one-liner)
+    * DownloadRun.ps1 (4 lines, watch the commented-out one-liner)
     * main.ps1 (4 lines)
 
 ## Script module aruments
