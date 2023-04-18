@@ -158,7 +158,6 @@ function SetupMachine {
             # Create Hard Links for AppData
             Write-Host '[SetupScript - INFO] Creating Hard-Links for Appdata folders...' -ForegroundColor Green
 
-            New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\Local\Microsoft\PowerToys -Target $env:USERPROFILE\OneDrive\AppData\Roaming\PowerToys
             New-Item -ItemType Junction -Path $env:USERPROFILE\AppData\LocalLow\5minlab -Target $env:USERPROFILE\OneDrive\AppData\Banana-PC\SaveData\BaamSquad\
         }
 
