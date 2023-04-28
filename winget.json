@@ -8,6 +8,9 @@
                     "PackageIdentifier": "7zip.7zip"
                 },
                 {
+                    "PackageIdentifier": "OpenVPNTechnologies.OpenVPN"
+                },
+                {
                     "PackageIdentifier": "GIMP.GIMP"
                 },
                 {
