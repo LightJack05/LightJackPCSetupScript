@@ -192,6 +192,10 @@ public class Wallpaper {
             $wallpaper = $env:LOCALAPPDATA + "\SetupScript\Wallpaper.jpg"  # absolute path to the image file
             [Wallpaper]::SetWallpaper($wallpaper)
 
+
+            Write-Host "[SetupScript - INFO] Disabling Stickey Keys" -ForegroundColor Green
+            Set-ItemProperty "HKCU:\Control Panel\Accessibility\StickyKeys\" -Name Flags -Value 506
+
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
