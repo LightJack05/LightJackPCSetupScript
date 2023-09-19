@@ -192,6 +192,9 @@ public class Wallpaper {
             $wallpaper = $env:LOCALAPPDATA + "\SetupScript\Wallpaper.jpg"  # absolute path to the image file
             [Wallpaper]::SetWallpaper($wallpaper)
 
+            powercfg.exe -x -monitor-timeout-ac 0
+            powercfg.exe -x -standby-timeout-ac 0
+
         }
 
         # Delete remaining files that are no longer needed, including the temp directory
