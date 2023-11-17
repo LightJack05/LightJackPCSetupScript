@@ -45,4 +45,4 @@ By default the "-All" option is enabled in "DownloadRun.bat". You may change tha
 
 
 ## Wallpaper Credit
-* Credit to @Sooparch on Discord for the Wallpaper
+* Credit to @Mimik on Discord for the Wallpaper
